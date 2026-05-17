@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CET-6 六级复习平台</title>
+<script src="vocab_data.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>📚 CET-6 六级复习平台</h1>
+    <p>近三年真题精析 · 题型规律总结 · 系统备考指南</p>
+  </div>
+  <div style="text-align:right">
+    <div style="font-size:0.85rem;opacity:0.85">复习进度</div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="globalProgress" style="width:0%"></div></div>
+    <div style="font-size:0.8rem;opacity:0.75;margin-top:4px" id="progressLabel">0 / 0 题已完成</div>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showPage('home')">🏠 首页</button>
+  <button onclick="showPage('outline')">📋 复习要点</button>
+  <button onclick="showPage('writing')">✍️ 作文</button>
+  <button onclick="showPage('listening')">🎧 听力</button>
+  <button onclick="showPage('reading')">📖 阅读</button>
+  <button onclick="showPage('translation')">🔄 翻译</button>
+  <button onclick="showPage('vocab')">📝 词汇</button>
+  <button onclick="showPage('quiz')">🎯 模拟测试</button>
+</nav>
+
+<div class="container">
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+  <div class="grid-4" style="margin-bottom:24px">
+    <div class="stat-card"><div class="icon">✍️</div><div class="value">15%</div><div class="label">作文 Writing</div></div>
+    <div class="stat-card"><div class="icon">🎧</div><div class="value">35%</div><div class="label">听力 Listening</div></div>
+    <div class="stat-card"><div class="icon">📖</div><div class="value">35%</div><div class="label">阅读 Reading</div></div>
+    <div class="stat-card"><div class="icon">🔄</div><div class="value">15%</div><div class="label">翻译 Translation</div></div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>📊 考试结构总览</h2>
+      <table>
+        <tr><th>题型</th><th>题数</th><th>分值</th><th>时间</th></tr>
+        <tr><td>写作</td><td>1题</td><td>15%</td><td>30分钟</td></tr>
+        <tr><td>听力长对话</td><td>8题</td><td>8%</td><td rowspan="3">约30分钟</td></tr>
+        <tr><td>听力篇章</td><td>7题</td><td>7%</td></tr>
+        <tr><td>听力讲座</td><td>10题</td><td>10%</td></tr>
+        <tr><td>阅读选词填空</td><td>10题</td><td>5%</td><td rowspan="3">约40分钟</td></tr>
+        <tr><td>阅读长篇匹配</td><td>10题</td><td>10%</td></tr>
+        <tr><td>仔细阅读</td><td>10题</td><td>20%</td></tr>
+        <tr><td>翻译（汉译英）</td><td>1段</td><td>15%</td><td>30分钟</td></tr>
+        <tr><td><strong>合计</strong></td><td><strong>57题</strong></td><td><strong>100%</strong></td><td><strong>130分钟</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <h2>🔥 近三年高频主题</h2>
+      <h3>作文高频话题</h3>
+      <div>
+        <span class="tag tag-blue">人工智能</span><span class="tag tag-blue">科技伦理</span>
+        <span class="tag tag-green">绿色发展</span><span class="tag tag-green">生态文明</span>
+        <span class="tag tag-orange">文化传承</span><span class="tag tag-orange">文化自信</span>
+        <span class="tag tag-purple">心理健康</span><span class="tag tag-purple">终身学习</span>
+        <span class="tag tag-red">乡村振兴</span><span class="tag tag-red">社会责任</span>
+      </div>
+      <h3>翻译高频主题</h3>
+      <div>
+        <span class="tag tag-orange">中国传统文化</span><span class="tag tag-blue">科技成就</span>
+        <span class="tag tag-green">历史地理</span><span class="tag tag-purple">社会发展</span>
+      </div>
+      <h3>阅读高频话题</h3>
+      <div>
+        <span class="tag tag-blue">AI与社会</span><span class="tag tag-green">环境科学</span>
+        <span class="tag tag-purple">心理学研究</span><span class="tag tag-orange">经济发展</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>⚡ 快速导航</h2>
+    <div class="grid-4">
+      <button class="btn btn-primary" onclick="showPage('outline')" style="width:100%">📋 查看复习要点</button>
+      <button class="btn btn-outline" onclick="showPage('writing')" style="width:100%">✍️ 作文练习</button>
+      <button class="btn btn-outline" onclick="showPage('translation')" style="width:100%">🔄 翻译练习</button>
+      <button class="btn btn-outline" onclick="showPage('quiz')" style="width:100%">🎯 模拟测试</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📅 备考时间规划建议</h2>
+    <div class="grid-3">
+      <div style="background:#eff6ff;border-radius:8px;padding:16px">
+        <div style="font-weight:700;color:var(--primary);margin-bottom:8px">考前4-8周</div>
+        <ul class="styled">
+          <li>系统学习各题型解题技巧</li>
+          <li>每天背诵30-50个六级词汇</li>
+          <li>精读近三年真题文章</li>
+          <li>每周写1-2篇作文</li>
+        </ul>
+      </div>
+      <div style="background:#f0fdf4;border-radius:8px;padding:16px">
+        <div style="font-weight:700;color:var(--success);margin-bottom:8px">考前2-4周</div>
+        <ul class="styled">
+          <li>完整套题模拟训练</li>
+          <li>重点攻克薄弱题型</li>
+          <li>翻译专项练习（中国文化主题）</li>
+          <li>听力每天精听30分钟</li>
+        </ul>
+      </div>
+      <div style="background:#fff7ed;border-radius:8px;padding:16px">
+        <div style="font-weight:700;color:var(--warning);margin-bottom:8px">考前1-2周</div>
+        <ul class="styled">
+          <li>回顾错题，总结规律</li>
+          <li>背诵作文模板和高分句型</li>
+          <li>复习翻译高频词汇表</li>
+          <li>保持状态，不要过度疲劳</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== OUTLINE PAGE ===== -->
+<div id="page-outline" class="page">
+  <div class="card">
+    <h2>📋 六级复习要点总纲（近三年规律）</h2>
+    <p class="text-muted">基于2022-2024年真题分析，按重要程度标注 <span class="priority-high">★★★高频</span> / <span class="priority-mid">★★中频</span></p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>✍️ 作文复习要点</h2>
+      <div class="outline-section">
+        <h3>题型规律</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 图画作文（约占60%）：描述→寓意→观点三段式</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 议论文（约占30%）：引出→论证→总结三段式</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 图表作文（约占10%）：描述趋势→分析原因→展望</div>
+      </div>
+      <div class="outline-section">
+        <h3>高频主题（必备）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 科技与社会：AI、数字化、科技伦理</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 绿色发展：环保、可持续、碳中和</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 文化传承：传统文化保护、文化自信</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 心理健康：压力、韧性、心理素质</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 教育发展：终身学习、素质教育</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 社会责任：志愿服务、乡村振兴</div>
+      </div>
+      <div class="outline-section">
+        <h3>写作技巧要点</h3>
+        <div class="outline-item">开头：避免直白，用引用/数据/现象引入</div>
+        <div class="outline-item">主体：每段一个论点，用具体例子支撑</div>
+        <div class="outline-item">结尾：升华主题，提出建议或展望</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 字数：150-200词，不少于150词</div>
+        <div class="outline-item">避免：中式英语、简单句堆砌、重复用词</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🔄 翻译复习要点</h2>
+      <div class="outline-section">
+        <h3>题型规律</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 100%为汉译英段落翻译，约140-180字</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 主题几乎全为中国文化/历史/科技/社会</div>
+        <div class="outline-item">时间30分钟，建议25分钟完成留5分钟检查</div>
+      </div>
+      <div class="outline-section">
+        <h3>高频主题（必备）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 中国传统文化：茶、书法、中医、节日、园林</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 历史地理：丝绸之路、长城、古代文明</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 科技成就：高铁、航天、新能源、5G</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 社会发展：乡村振兴、脱贫攻坚、一带一路</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 饮食文化：八大菜系、饮食哲学</div>
+      </div>
+      <div class="outline-section">
+        <h3>翻译技巧要点</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 四字成语：意译为主，必要时加括号解释</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 长句拆分：中文长句→英文多个短句</div>
+        <div class="outline-item">被动转换："人们认为"→"It is believed that"</div>
+        <div class="outline-item">文化专有名词：保留拼音+括号英文解释</div>
+        <div class="outline-item">数量词：数千年→thousands of years/millennia</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <h2>📖 阅读复习要点</h2>
+      <div class="outline-section">
+        <h3>选词填空（Banked Cloze）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 15选10，注意词性和搭配</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 高频动词：facilitate/enhance/undermine/foster</div>
+        <div class="outline-item">先通读全文，再根据语境选词</div>
+        <div class="outline-item">注意固定搭配：attribute to, contribute to</div>
+      </div>
+      <div class="outline-section">
+        <h3>长篇阅读（匹配题）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 先读题干关键词，再扫描段落首句</div>
+        <div class="outline-item">注意同义替换，正确答案≠原文照搬</div>
+        <div class="outline-item">一段可对应多题，不要排除已用段落</div>
+        <div class="outline-item">时间控制：约15分钟完成</div>
+      </div>
+      <div class="outline-section">
+        <h3>仔细阅读（精读）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 细节题（40%）：定位关键词，原文找答案</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 推断题（25%）：不能超出文章范围</div>
+        <div class="outline-item">警惕绝对词：always/never/only→多为错误选项</div>
+        <div class="outline-item">转折词后（but/however）常是考点</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>🎧 听力复习要点</h2>
+      <div class="outline-section">
+        <h3>长对话（Long Conversations）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 高频场景：求职、学术、旅行、健康</div>
+        <div class="outline-item">注意转折词后的信息（but/actually/however）</div>
+        <div class="outline-item">说话人语气→态度题答案</div>
+      </div>
+      <div class="outline-section">
+        <h3>听力篇章（Passages）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 首句=主旨句，重点听</div>
+        <div class="outline-item">数字、时间、地名是细节题常考点</div>
+        <div class="outline-item">高频话题：社会现象、科普知识、历史文化</div>
+      </div>
+      <div class="outline-section">
+        <h3>讲座/报道（Lectures）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 难度最高，注意论点结构</div>
+        <div class="outline-item">信号词：first/second/however/therefore</div>
+        <div class="outline-item">最后一题常考主旨或说话人目的</div>
+        <div class="outline-item">备考：每天精听VOA/BBC慢速英语</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 词汇复习要点</h2>
+    <div class="grid-3">
+      <div>
+        <h3>高频动词（必背）</h3>
+        <ul class="styled">
+          <li><strong>facilitate</strong> 促进/便利</li>
+          <li><strong>enhance</strong> 增强/提高</li>
+          <li><strong>undermine</strong> 削弱/破坏</li>
+          <li><strong>foster</strong> 培养/促进</li>
+          <li><strong>alleviate</strong> 减轻/缓解</li>
+          <li><strong>exacerbate</strong> 加剧/恶化</li>
+          <li><strong>advocate</strong> 倡导/支持</li>
+          <li><strong>acknowledge</strong> 承认/认可</li>
+          <li><strong>implement</strong> 实施/执行</li>
+          <li><strong>attribute to</strong> 归因于</li>
+        </ul>
+      </div>
+      <div>
+        <h3>高频形容词（必背）</h3>
+        <ul class="styled">
+          <li><strong>prevalent</strong> 普遍的</li>
+          <li><strong>substantial</strong> 大量的/实质的</li>
+          <li><strong>inevitable</strong> 不可避免的</li>
+          <li><strong>sustainable</strong> 可持续的</li>
+          <li><strong>vulnerable</strong> 脆弱的</li>
+          <li><strong>comprehensive</strong> 全面的</li>
+          <li><strong>innovative</strong> 创新的</li>
+          <li><strong>controversial</strong> 有争议的</li>
+          <li><strong>empirical</strong> 实证的</li>
+          <li><strong>demographic</strong> 人口统计的</li>
+        </ul>
+      </div>
+      <div>
+        <h3>高频名词（必背）</h3>
+        <ul class="styled">
+          <li><strong>initiative</strong> 倡议/主动性</li>
+          <li><strong>perspective</strong> 观点/视角</li>
+          <li><strong>implication</strong> 含义/影响</li>
+          <li><strong>mechanism</strong> 机制</li>
+          <li><strong>framework</strong> 框架</li>
+          <li><strong>inequality</strong> 不平等</li>
+          <li><strong>resilience</strong> 韧性/恢复力</li>
+          <li><strong>biodiversity</strong> 生物多样性</li>
+          <li><strong>entrepreneurship</strong> 创业精神</li>
+          <li><strong>correlation</strong> 相关性</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WRITING PAGE ===== -->
+<div id="page-writing" class="page">
+  <div class="card">
+    <h2>✍️ 作文板块总览</h2>
+    <p class="text-muted">作文占总分15%，时间30分钟，要求150-200词。题型以图画作文、议论文、图表作文为主。</p>
+  </div>
+
+  <!-- 常考点分析 -->
+  <div class="card">
+    <h2>🔥 常考点与重难点分析</h2>
+    <div class="grid-2">
+      <div>
+        <h3>题型分布（近三年）</h3>
+        <table>
+          <tr><th>题型</th><th>占比</th><th>代表年份</th></tr>
+          <tr><td>图画作文</td><td>~44%</td><td>2024/6、2023/6、2022/6</td></tr>
+          <tr><td>议论文</td><td>~33%</td><td>2024/6、2023/12、2023/6</td></tr>
+          <tr><td>图表作文</td><td>~22%</td><td>2023/12、2022/12</td></tr>
+        </table>
+        <h3 style="margin-top:16px">高频主题（必备）</h3>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <span class="tag tag-blue">人工智能与就业</span>
+          <span class="tag tag-blue">科技伦理</span>
+          <span class="tag tag-green">绿色消费/环保</span>
+          <span class="tag tag-green">可持续发展</span>
+          <span class="tag tag-orange">文化传承与自信</span>
+          <span class="tag tag-orange">传统文化保护</span>
+          <span class="tag tag-purple">心理健康/学业压力</span>
+          <span class="tag tag-purple">终身学习</span>
+          <span class="tag tag-red">乡村振兴</span>
+          <span class="tag tag-red">社会责任</span>
+          <span class="tag tag-blue">网络社交</span>
+          <span class="tag tag-green">体育精神</span>
+        </div>
+      </div>
+      <div>
+        <h3>重难点突破</h3>
+        <div class="accordion">
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 图画作文三段式结构 <span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.9rem">
+            <b>第一段（描述图画）：</b>As is vividly depicted in the picture...<br>
+            <b>第二段（阐释寓意）：</b>The picture is intended to convey the message that...<br>
+            <b>第三段（表达观点）：</b>In my opinion... / From my perspective...<br>
+            <span style="color:var(--danger)">⚠️ 重点：第二段占分最重，需展开论述，不少于80词</span>
+          </div>
+        </div>
+        <div class="accordion" style="margin-top:8px">
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 议论文常见失分点 <span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.9rem">
+            <b>1. 立场不明确</b>——开头或结尾必须明确表态<br>
+            <b>2. 论据空洞</b>——需举具体例子或数据支撑<br>
+            <b>3. 词汇重复</b>——同一词不超过2次，多用同义替换<br>
+            <b>4. 字数不足</b>——低于150词扣分，建议写到180词
+          </div>
+        </div>
+        <div class="accordion" style="margin-top:8px">
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 高分词汇替换表 <span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.9rem">
+            think → contend / argue / maintain<br>
+            important → crucial / vital / paramount<br>
+            show → demonstrate / reveal / indicate<br>
+            problem → challenge / dilemma / issue<br>
+            because → owing to / due to / in light of<br>
+            many → a multitude of / numerous / a host of
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 真题题目列表 -->
+  <div class="card">
+    <h2>📌 历年真题练习（2023-2025）</h2>
+    <p class="text-muted" style="margin-bottom:16px">点击题目进入写作练习区，可查看写作思路与高分句型。</p>
+    <div id="writing-topic-list">
+      <!-- populated by initWritingPage() in app.js -->
+    </div>
+  </div>
+
+  <div class="card" id="writing-practice-area" style="display:none">
+    <h2>📝 写作区域</h2>
+    <div class="writing-prompt" id="selected-topic"></div>
+    <textarea id="writing-input" placeholder="在此输入你的作文..." oninput="updateWordCount()"></textarea>
+    <div class="word-count" id="wc-display">字数：0 词</div>
+    <div style="display:flex;gap:12px;margin-top:16px;flex-wrap:wrap">
+      <button class="btn btn-primary" onclick="showWritingTips()">💡 查看写作思路</button>
+      <button class="btn btn-outline" onclick="clearWriting()">🗑️ 清空</button>
+    </div>
+    <div id="writing-tips" class="accordion" style="display:none;margin-top:16px">
+      <div class="accordion-header" onclick="toggleAccordion(this)">
+        📖 参考思路与高分句型 <span class="accordion-arrow">▼</span>
+      </div>
+      <div class="accordion-body open" id="writing-tips-body"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📚 高分句型速查</h2>
+    <div class="grid-2">
+      <div>
+        <h3>开头句型</h3>
+        <ul class="styled">
+          <li>With the rapid development of [领域], [现象] has become increasingly prominent.</li>
+          <li>It is universally acknowledged that [观点].</li>
+          <li>The issue of [话题] has sparked widespread debate in recent years.</li>
+          <li>As is vividly depicted in the picture, [描述图画].</li>
+        </ul>
+        <h3>过渡句型</h3>
+        <ul class="styled">
+          <li>In addition to / Furthermore / Moreover / What's more...</li>
+          <li>However / Nevertheless / On the contrary...</li>
+          <li>From a different perspective / On the other hand...</li>
+        </ul>
+      </div>
+      <div>
+        <h3>论证句型</h3>
+        <ul class="styled">
+          <li>Those who support [观点] contend that [理由].</li>
+          <li>Statistics/Research shows that [数据/结论].</li>
+          <li>A case in point is [具体例子].</li>
+          <li>The reason behind this phenomenon is that [原因].</li>
+        </ul>
+        <h3>结尾句型</h3>
+        <ul class="styled">
+          <li>In conclusion, taking everything into consideration...</li>
+          <li>It is high time that we [建议].</li>
+          <li>Only by [方法] can we [目标].</li>
+          <li>I firmly believe that [展望].</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== LISTENING PAGE ===== -->
+<div id="page-listening" class="page">
+  <div class="card">
+    <h2>🎧 听力备考指南</h2>
+    <p class="text-muted">听力占总分35%，是六级考试中分值最高的部分。本页提供题型分析、备考策略和模拟题练习。</p>
+  </div>
+
+  <div class="grid-3">
+    <div class="card">
+      <h2>💬 长对话</h2>
+      <div><span class="badge badge-blue">8题 / 8%</span></div>
+      <h3>高频场景</h3>
+      <ul class="styled">
+        <li>求职面试 / 工作讨论</li>
+        <li>学术问题 / 论文选题</li>
+        <li>旅行计划 / 住宿安排</li>
+        <li>健康问题 / 医院就诊</li>
+        <li>购物 / 消费决策</li>
+      </ul>
+      <h3>答题技巧</h3>
+      <ul class="styled">
+        <li>预读选项，预判内容</li>
+        <li>注意转折词后的信息</li>
+        <li>语气暗示态度题答案</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>📄 听力篇章</h2>
+      <div><span class="badge badge-green">7题 / 7%</span></div>
+      <h3>高频话题</h3>
+      <ul class="styled">
+        <li>社会现象（环保、科技）</li>
+        <li>历史文化（名人传记）</li>
+        <li>科普知识（动物、医学）</li>
+        <li>商业经济（公司、创业）</li>
+      </ul>
+      <h3>答题技巧</h3>
+      <ul class="styled">
+        <li>首句=主旨句，重点听</li>
+        <li>数字、时间是细节考点</li>
+        <li>注意段落逻辑关系</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h2>🎓 讲座/报道</h2>
+      <div><span class="badge badge-red">10题 / 10%</span></div>
+      <h3>高频话题</h3>
+      <ul class="styled">
+        <li>学术研究（心理、社会学）</li>
+        <li>科技发展（AI、新能源）</li>
+        <li>社会问题（贫困、教育）</li>
+        <li>环境议题（气候变化）</li>
+      </ul>
+      <h3>答题技巧</h3>
+      <ul class="styled">
+        <li>听清论点结构</li>
+        <li>注意信号词</li>
+        <li>最后一题常考主旨</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>📋 听力高频词汇</h2>
+    <div class="grid-3">
+      <div>
+        <h3>学术/科研类</h3>
+        <table>
+          <tr><th>英文</th><th>中文</th></tr>
+          <tr><td>hypothesis</td><td>假设</td></tr>
+          <tr><td>methodology</td><td>研究方法</td></tr>
+          <tr><td>findings</td><td>研究结果</td></tr>
+          <tr><td>significant</td><td>显著的</td></tr>
+          <tr><td>correlation</td><td>相关性</td></tr>
+          <tr><td>implication</td><td>含义/影响</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>社会/经济类</h3>
+        <table>
+          <tr><th>英文</th><th>中文</th></tr>
+          <tr><td>unemployment rate</td><td>失业率</td></tr>
+          <tr><td>recession</td><td>经济衰退</td></tr>
+          <tr><td>inflation</td><td>通货膨胀</td></tr>
+          <tr><td>entrepreneurship</td><td>创业精神</td></tr>
+          <tr><td>workforce</td><td>劳动力</td></tr>
+          <tr><td>inequality</td><td>不平等</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>环境类</h3>
+        <table>
+          <tr><th>英文</th><th>中文</th></tr>
+          <tr><td>carbon emissions</td><td>碳排放</td></tr>
+          <tr><td>renewable energy</td><td>可再生能源</td></tr>
+          <tr><td>biodiversity</td><td>生物多样性</td></tr>
+          <tr><td>deforestation</td><td>森林砍伐</td></tr>
+          <tr><td>ecosystem</td><td>生态系统</td></tr>
+          <tr><td>sustainability</td><td>可持续性</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🗓️ 听力备考计划</h2>
+    <div class="grid-2">
+      <div style="background:#f0fdf4;border-radius:8px;padding:16px">
+        <div style="font-weight:700;color:var(--success);margin-bottom:8px">每日练习（30分钟）</div>
+        <ul class="styled">
+          <li>精听：VOA慢速英语1篇（逐句听写）</li>
+          <li>泛听：TED演讲或BBC新闻15分钟</li>
+          <li>复习：整理生词和表达</li>
+        </ul>
+      </div>
+      <div style="background:#eff6ff;border-radius:8px;padding:16px">
+        <div style="font-weight:700;color:var(--primary);margin-bottom:8px">考前冲刺（每周）</div>
+        <ul class="styled">
+          <li>完整听力套题模拟（2套/周）</li>
+          <li>重点分析错题原因</li>
+          <li>总结高频场景词汇</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>🎧 历年真题练习（2023-2025）</h2>
+    <p class="text-muted" style="margin-bottom:16px">选择套次后播放音频，对照题目作答，完成后核对答案。</p>
+    <div id="listening-exam-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+    <div id="listening-section-tabs" style="display:none;margin-bottom:16px;gap:8px">
+      <button class="btn btn-primary btn-sm" onclick="showListeningSection('secA')" id="ltab-secA">Section A 短对话</button>
+      <button class="btn btn-outline btn-sm" onclick="showListeningSection('secB')" id="ltab-secB">Section B 长对话</button>
+      <button class="btn btn-outline btn-sm" onclick="showListeningSection('secC')" id="ltab-secC">Section C 听力篇章</button>
+    </div>
+    <div id="listening-audio-player" style="display:none;margin-bottom:16px">
+      <audio id="listening-audio" controls style="width:100%;border-radius:8px"></audio>
+      <p id="listening-audio-note" style="font-size:0.82rem;color:var(--text-muted);margin-top:4px"></p>
+    </div>
+    <div id="listening-exam-content"></div>
+  </div>
+</div>
+
+<!-- ===== READING PAGE ===== -->
+<div id="page-reading" class="page">
+  <div class="card">
+    <h2>📖 阅读理解真题练习</h2>
+    <p class="text-muted">阅读占总分35%，包含选词填空（Section A）、长篇匹配（Section B）和仔细阅读（Section C）三种题型。</p>
+  </div>
+  <div class="card">
+    <h3>选择真题套次</h3>
+    <div id="reading-exam-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+    <div id="reading-section-tabs" style="display:none;margin-bottom:16px">
+      <button class="btn btn-primary btn-sm" onclick="showReadingSection('cloze')" id="rtab-cloze">Section A 选词填空</button>
+      <button class="btn btn-outline btn-sm" onclick="showReadingSection('sectionb')" id="rtab-sectionb">Section B 长篇阅读</button>
+      <button class="btn btn-outline btn-sm" onclick="showReadingSection('reading')" id="rtab-reading">Section C 仔细阅读</button>
+    </div>
+    <div id="reading-exam-content"></div>
+  </div>
+</div>
+
+<!-- ===== TRANSLATION PAGE ===== -->
+<div id="page-translation" class="page">
+  <div class="card">
+    <h2>🔄 翻译练习</h2>
+    <p class="text-muted">翻译占总分15%，全部为汉译英段落翻译，主题以中国文化、历史、科技为主。</p>
+  </div>
+
+  <div class="card">
+    <h3>选择真题套次</h3>
+    <div id="trans-exam-selector" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px"></div>
+    <div id="trans-exam-content"></div>
+  </div>
+
+    <div class="card">
+    <h2>📚 翻译高频词汇速查</h2>
+    <div class="grid-2">
+      <div>
+        <h3>中国文化专有名词</h3>
+        <table>
+          <tr><th>中文</th><th>英文</th></tr>
+          <tr><td>丝绸之路</td><td>the Silk Road</td></tr>
+          <tr><td>一带一路</td><td>the Belt and Road Initiative</td></tr>
+          <tr><td>春节</td><td>the Spring Festival (Chinese New Year)</td></tr>
+          <tr><td>中秋节</td><td>the Mid-Autumn Festival</td></tr>
+          <tr><td>端午节</td><td>the Dragon Boat Festival</td></tr>
+          <tr><td>太极拳</td><td>Tai Chi</td></tr>
+          <tr><td>针灸</td><td>acupuncture</td></tr>
+          <tr><td>书法</td><td>calligraphy</td></tr>
+          <tr><td>瓷器</td><td>porcelain / china</td></tr>
+          <tr><td>非物质文化遗产</td><td>intangible cultural heritage</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3>常用翻译表达</h3>
+        <table>
+          <tr><th>中文</th><th>英文</th></tr>
+          <tr><td>举世瞩目</td><td>attract worldwide attention</td></tr>
+          <tr><td>博大精深</td><td>extensive and profound</td></tr>
+          <tr><td>天人合一</td><td>harmony between man and nature</td></tr>
+          <tr><td>数千年</td><td>thousands of years / millennia</td></tr>
+          <tr><td>越来越多</td><td>an increasing number of</td></tr>
+          <tr><td>深远影响</td><td>profound influence / far-reaching impact</td></tr>
+          <tr><td>重要组成部分</td><td>an important component of</td></tr>
+          <tr><td>促进发展</td><td>promote / facilitate development</td></tr>
+          <tr><td>体现了</td><td>reflect / embody / demonstrate</td></tr>
+          <tr><td>标志着</td><td>mark / signify / represent</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== VOCAB PAGE ===== -->
+<div id="page-vocab" class="page">
+
+  <!-- 搜索栏 -->
+  <div class="card" style="margin-bottom:16px">
+    <h2>🔍 词汇搜索</h2>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <input id="vocab-search-input" type="text" placeholder="输入英文单词或中文释义搜索…"
+        style="flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:0.95rem;outline:none"
+        oninput="vocabSearch()" onfocus="this.style.borderColor='var(--primary)'" onblur="this.style.borderColor='var(--border)'">
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('vocab-search-input').value='';vocabSearch()">✕ 清空</button>
+    </div>
+    <div id="vocab-search-results" style="margin-top:12px"></div>
+  </div>
+
+  <!-- 闪卡区 -->
+  <div class="card">
+    <div class="flex-between" style="flex-wrap:wrap;gap:12px;margin-bottom:16px">
+      <div>
+        <h2 style="margin-bottom:4px">📇 随机闪卡练习</h2>
+        <p class="text-muted" style="font-size:0.85rem">每次随机抽取20张（简单5·中等10·难5），点击卡片翻转查看释义</p>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span id="vocab-stats" class="text-muted" style="font-size:0.82rem"></span>
+        <button class="btn btn-primary" onclick="drawCards()">🔀 随机刷新20词</button>
+        <button class="btn btn-outline btn-sm" onclick="showWordbook()">📖 生词本</button>
+      </div>
+    </div>
+
+    <!-- 难度图例 -->
+    <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <span style="font-size:0.82rem;color:var(--text-muted)">难度：</span>
+      <span class="badge" style="background:#d1fae5;color:#065f46">● 简单</span>
+      <span class="badge" style="background:#fef9c3;color:#92400e">● 中等</span>
+      <span class="badge" style="background:#fee2e2;color:#991b1b">● 难</span>
+      <span style="font-size:0.82rem;color:var(--text-muted);margin-left:8px">进度：</span>
+      <span id="card-progress" style="font-size:0.82rem;color:var(--text-muted)">0/20 已翻转</span>
+    </div>
+
+    <div id="flashcard-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px"></div>
+  </div>
+
+  <!-- 生词本弹窗 -->
+  <div id="wordbook-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;overflow-y:auto" onclick="if(event.target===this)closeWordbook()">
+    <div style="background:white;max-width:700px;margin:40px auto;border-radius:16px;padding:28px;position:relative">
+      <div class="flex-between" style="margin-bottom:16px">
+        <h2 style="font-size:1.2rem">📖 我的生词本 <span id="wb-count" class="badge badge-red"></span></h2>
+        <button class="btn btn-outline btn-sm" onclick="closeWordbook()">✕ 关闭</button>
+      </div>
+      <div id="wordbook-list"></div>
+      <div style="margin-top:16px;display:flex;gap:10px">
+        <button class="btn btn-outline btn-sm" onclick="exportWordbook()">📥 导出生词本</button>
+        <button class="btn btn-outline btn-sm" style="color:var(--danger);border-color:var(--danger)" onclick="clearWordbook()">🗑️ 清空生词本</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ===== QUIZ PAGE ===== -->
+<div id="page-quiz" class="page">
+  <div class="card">
+    <h2>🎯 模拟测试中心</h2>
+    <p class="text-muted">分为4个专项测试和1个综合测试，每类10套，基于近三年真题规律生成。</p>
+  </div>
+
+  <div class="card">
+    <h2>📚 专项模拟测试</h2>
+    <div class="grid-4" style="margin-bottom:16px">
+      <button class="btn btn-primary" onclick="showMockType('writing')" style="width:100%;padding:16px">
+        <div style="font-size:1.5rem">✍️</div>
+        <div style="font-weight:700;margin-top:4px">写作专项</div>
+        <div style="font-size:0.8rem;opacity:0.85">10套练习</div>
+      </button>
+      <button class="btn btn-outline" onclick="showMockType('reading')" style="width:100%;padding:16px">
+        <div style="font-size:1.5rem">📖</div>
+        <div style="font-weight:700;margin-top:4px">阅读专项</div>
+        <div style="font-size:0.8rem;opacity:0.75">10套练习</div>
+      </button>
+      <button class="btn btn-outline" onclick="showMockType('translation')" style="width:100%;padding:16px">
+        <div style="font-size:1.5rem">🔄</div>
+        <div style="font-weight:700;margin-top:4px">翻译专项</div>
+        <div style="font-size:0.8rem;opacity:0.75">10套练习</div>
+      </button>
+      <button class="btn btn-outline" onclick="showMockType('vocab')" style="width:100%;padding:16px">
+        <div style="font-size:1.5rem">📝</div>
+        <div style="font-weight:700;margin-top:4px">词汇专项</div>
+        <div style="font-size:0.8rem;opacity:0.75">10套练习</div>
+      </button>
+    </div>
+    <button class="btn btn-primary" onclick="showMockType('comprehensive')" style="width:100%;padding:14px;background:linear-gradient(135deg,var(--primary),var(--secondary))">
+      🏆 综合模拟测试（写作+阅读+翻译+词汇）· 10套
+    </button>
+  </div>
+
+  <div id="mock-type-area" style="display:none" class="card">
+    <h3 id="mock-type-title"></h3>
+    <div id="mock-set-list" class="mock-set-list"></div>
+  </div>
+
+  <div id="mock-practice-area" style="display:none"></div>
+
+  <div class="card" style="margin-top:16px">
+    <h2>🔤 基础词汇测试</h2>
+    <p class="text-muted">包含词汇、阅读理解、翻译判断等题型，测试你的备考水平。</p>
+    <div id="quiz-start-area">
+      <div class="grid-3" style="margin:20px 0">
+        <div class="stat-card"><div class="icon">📝</div><div class="value">20</div><div class="label">题目总数</div></div>
+        <div class="stat-card"><div class="icon">⏱️</div><div class="value">15</div><div class="label">建议分钟</div></div>
+        <div class="stat-card"><div class="icon">🏆</div><div class="value">60%</div><div class="label">及格线</div></div>
+      </div>
+      <button class="btn btn-primary" onclick="startQuiz()">开始测试</button>
+    </div>
+    <div id="quiz-area" style="display:none"></div>
+    <div id="quiz-result" style="display:none"></div>
+  </div>
+</div>
+
+</div><!-- end .container -->
+
+<script src="data/writing.js"></script>
+<script src="data/reading.js"></script>
+<script src="data/translation.js"></script>
+<script src="data/listening.js"></script>
+<script src="data/quiz.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

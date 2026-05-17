@@ -1,0 +1,18 @@
+# 原始 PDF（版权敏感，数据已提取到 data/ 中）
+History_Exam/
+Voca/
+
+# Windows 下载标记文件
+*Zone.Identifier*
+
+# Kiro/Claude 本地配置
+.claude/
+
+# 词汇中间产物（已合并进 vocab_data.js）
+vocab_merged.json
+vocab_xdf.json
+vocab_zhoujihua.json
+
+# 一次性提取脚本
+extract_vocab.py
+extract_zhoujihua.py
