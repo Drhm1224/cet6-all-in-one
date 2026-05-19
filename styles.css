@@ -169,6 +169,38 @@ ul.styled li { margin-bottom: 6px; font-size: 0.9rem; }
 .vocab-group-body table td { padding: 5px 10px; border-bottom: 1px solid #f1f5f9; }
 .vocab-group-body table tr:last-child td { border-bottom: none; }
 
+/* Floating exam timer */
+#exam-timer-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: var(--primary); color: white;
+  display: none; align-items: center; justify-content: center; gap: 16px;
+  padding: 8px 20px; font-weight: 700; font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+#exam-timer-bar.warning { background: #d97706; }
+#exam-timer-bar.danger { background: var(--danger); }
+#exam-timer-bar.show { display: flex; }
+#exam-timer-display { font-size: 1.25rem; font-variant-numeric: tabular-nums; letter-spacing: 2px; }
+#exam-timer-bar button { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); color: white; border-radius: 6px; padding: 3px 12px; cursor: pointer; font-size: 0.82rem; }
+#exam-timer-bar button:hover { background: rgba(255,255,255,0.35); }
+
+/* Score history */
+.score-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 0.85rem; }
+.score-bar-label { width: 130px; flex-shrink: 0; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.8rem; }
+.score-bar-track { flex: 1; background: #f1f5f9; border-radius: 4px; height: 16px; overflow: hidden; }
+.score-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.score-bar-fill.good { background: var(--success); }
+.score-bar-fill.ok { background: var(--warning); }
+.score-bar-fill.bad { background: var(--danger); }
+.score-bar-pct { width: 38px; text-align: right; font-weight: 700; flex-shrink: 0; font-size: 0.82rem; }
+
+/* Wrong answer notebook */
+.wrong-item { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; padding: 14px 16px; margin-bottom: 10px; }
+.wrong-item .wrong-q { font-weight: 600; margin-bottom: 8px; font-size: 0.92rem; }
+.wrong-item .wrong-ans { font-size: 0.85rem; color: var(--success); font-weight: 600; margin-bottom: 4px; }
+.wrong-item .wrong-exp { font-size: 0.83rem; color: var(--text-muted); line-height: 1.5; }
+.wrong-item .wrong-src { font-size: 0.78rem; color: #9ca3af; margin-top: 6px; }
+
 /* Home quick-nav buttons */
 .home-nav-btn {
   background: var(--card);

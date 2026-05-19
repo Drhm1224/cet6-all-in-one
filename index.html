@@ -9,15 +9,17 @@
 </head>
 <body>
 
+<div id="exam-timer-bar">
+  <span id="exam-timer-label">⏱ 考试计时</span>
+  <span id="exam-timer-display">00:00</span>
+  <button onclick="toggleTimer()">暂停</button>
+  <button onclick="stopTimer()">结束</button>
+</div>
+
 <header>
   <div>
     <h1>📚 CET-6 六级复习平台</h1>
     <p>近三年真题精析 · 题型规律总结 · 系统备考指南</p>
-  </div>
-  <div style="text-align:right">
-    <div style="font-size:0.85rem;opacity:0.85">复习进度</div>
-    <div class="progress-bar-wrap"><div class="progress-bar" id="globalProgress" style="width:0%"></div></div>
-    <div style="font-size:0.8rem;opacity:0.75;margin-top:4px" id="progressLabel">0 / 0 题已完成</div>
   </div>
 </header>
 
@@ -895,11 +897,12 @@
 <div id="page-quiz" class="page">
   <div class="card">
     <h2>🎯 模拟测试中心</h2>
-    <p class="text-muted">分为4个专项测试和1个综合测试，每类10套，基于近三年真题规律生成。</p>
+    <p class="text-muted">专项练习 · 综合模拟 · 计时训练 · 错题本 · 成绩趋势</p>
   </div>
 
   <div class="card">
     <h2>📚 专项模拟测试</h2>
+    <p class="text-muted" style="margin-bottom:12px">每套练习可开启计时，答题后自动记录成绩。</p>
     <div class="grid-4" style="margin-bottom:16px">
       <button class="btn btn-primary" onclick="showMockType('writing')" style="width:100%;padding:16px">
         <div style="font-size:1.5rem">✍️</div>
@@ -928,7 +931,18 @@
   </div>
 
   <div id="mock-type-area" style="display:none" class="card">
-    <h3 id="mock-type-title"></h3>
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px">
+      <h3 id="mock-type-title" style="margin:0"></h3>
+      <label style="display:flex;align-items:center;gap:8px;font-size:0.88rem;color:var(--text-muted);cursor:pointer">
+        <input type="checkbox" id="timer-enable-check" style="accent-color:var(--primary)"> 开启计时
+        <select id="timer-duration-select" style="border:1px solid var(--border);border-radius:6px;padding:3px 8px;font-size:0.85rem">
+          <option value="1800">30分钟</option>
+          <option value="3600">60分钟</option>
+          <option value="4800">80分钟</option>
+          <option value="7800" selected>130分钟（全卷）</option>
+        </select>
+      </label>
+    </div>
     <div id="mock-set-list" class="mock-set-list"></div>
   </div>
 
@@ -936,7 +950,7 @@
 
   <div class="card" style="margin-top:16px">
     <h2>🔤 基础词汇测试</h2>
-    <p class="text-muted">包含词汇、阅读理解、翻译判断等题型，测试你的备考水平。</p>
+    <p class="text-muted">词汇、阅读理解、翻译判断等题型，20题，建议15分钟完成。</p>
     <div id="quiz-start-area">
       <div class="grid-3" style="margin:20px 0">
         <div class="stat-card"><div class="icon">📝</div><div class="value">20</div><div class="label">题目总数</div></div>
@@ -947,6 +961,22 @@
     </div>
     <div id="quiz-area" style="display:none"></div>
     <div id="quiz-result" style="display:none"></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+      <h2 style="margin:0">📈 成绩趋势</h2>
+      <button class="btn btn-outline btn-sm" onclick="clearScoreHistory()" style="font-size:0.8rem">清空记录</button>
+    </div>
+    <div id="score-history-area"><p class="text-muted" style="font-size:0.88rem">暂无记录。完成任意模拟测试后自动保存。</p></div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:16px">
+      <h2 style="margin:0">📋 错题本</h2>
+      <button class="btn btn-outline btn-sm" onclick="clearWrongBook()" style="font-size:0.8rem">清空错题</button>
+    </div>
+    <div id="wrong-book-area"><p class="text-muted" style="font-size:0.88rem">暂无错题。答题后答错的客观题自动收录。</p></div>
   </div>
 </div>
 

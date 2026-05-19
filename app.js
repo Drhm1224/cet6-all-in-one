@@ -11,11 +11,13 @@ function showPage(name) {
   document.querySelectorAll('.home-nav-btn').forEach(b => b.classList.remove('active'));
   const hBtn = document.getElementById('hnav-' + name);
   if (hBtn) hBtn.classList.add('active');
+  if (name !== 'quiz') stopTimer();
   if (name === 'vocab') renderVocab('all');
   if (name === 'reading') initReadingPage();
   if (name === 'translation') initTranslationPage();
   if (name === 'writing') initWritingPage();
   if (name === 'listening') initListeningPage();
+  if (name === 'quiz') { renderScoreHistory(); renderWrongBook(); }
 }
 
 // ===== Writing =====
@@ -466,6 +468,137 @@ function renderVocab(filter) {
   // placeholder — vocab page uses flashcard system
 }
 
+// ===== Timer =====
+let timerInterval = null;
+let timerRemaining = 0;
+let timerPaused = false;
+
+function startTimer(seconds, label) {
+  stopTimer();
+  timerRemaining = seconds;
+  timerPaused = false;
+  const bar = document.getElementById('exam-timer-bar');
+  document.getElementById('exam-timer-label').textContent = '⏱ ' + label;
+  bar.className = 'show';
+  updateTimerDisplay();
+  timerInterval = setInterval(() => {
+    if (timerPaused) return;
+    timerRemaining--;
+    updateTimerDisplay();
+    const bar = document.getElementById('exam-timer-bar');
+    if (timerRemaining <= 300 && timerRemaining > 60) bar.className = 'show warning';
+    else if (timerRemaining <= 60) bar.className = 'show danger';
+    if (timerRemaining <= 0) {
+      clearInterval(timerInterval);
+      timerInterval = null;
+      bar.className = 'show danger';
+      document.getElementById('exam-timer-display').textContent = '时间到！';
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(timerRemaining / 60);
+  const s = timerRemaining % 60;
+  document.getElementById('exam-timer-display').textContent =
+    String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+}
+
+function toggleTimer() {
+  timerPaused = !timerPaused;
+  document.querySelector('#exam-timer-bar button').textContent = timerPaused ? '继续' : '暂停';
+}
+
+function stopTimer() {
+  if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+  const bar = document.getElementById('exam-timer-bar');
+  if (bar) bar.className = '';
+}
+
+// ===== Score History =====
+function loadScores() {
+  try { return JSON.parse(localStorage.getItem('cet6_scores') || '[]'); } catch(e) { return []; }
+}
+
+function saveScore(label, correct, total) {
+  const scores = loadScores();
+  scores.push({ date: new Date().toLocaleDateString('zh-CN'), label, correct, total, pct: Math.round(correct/total*100) });
+  if (scores.length > 50) scores.splice(0, scores.length - 50);
+  localStorage.setItem('cet6_scores', JSON.stringify(scores));
+  renderScoreHistory();
+}
+
+function renderScoreHistory() {
+  const area = document.getElementById('score-history-area');
+  if (!area) return;
+  const scores = loadScores();
+  if (!scores.length) {
+    area.innerHTML = '<p class="text-muted" style="font-size:0.88rem">暂无记录。完成任意模拟测试后自动保存。</p>';
+    return;
+  }
+  const recent = scores.slice(-20).reverse();
+  area.innerHTML = recent.map(s => {
+    const cls = s.pct >= 80 ? 'good' : s.pct >= 60 ? 'ok' : 'bad';
+    return `<div class="score-bar-row">
+      <span class="score-bar-label" title="${s.date} ${s.label}">${s.date} ${s.label}</span>
+      <div class="score-bar-track"><div class="score-bar-fill ${cls}" style="width:${s.pct}%"></div></div>
+      <span class="score-bar-pct" style="color:var(--${cls==='good'?'success':cls==='ok'?'warning':'danger'})">${s.pct}%</span>
+    </div>`;
+  }).join('') + `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px">显示最近 ${recent.length} 条记录</p>`;
+}
+
+function clearScoreHistory() {
+  if (!confirm('确定清空所有成绩记录？')) return;
+  localStorage.removeItem('cet6_scores');
+  renderScoreHistory();
+}
+
+// ===== Wrong Answer Notebook =====
+function loadWrongBook() {
+  try { return JSON.parse(localStorage.getItem('cet6_wrong') || '[]'); } catch(e) { return []; }
+}
+
+function addWrongAnswers(questions, answers, source, nameKey) {
+  const book = loadWrongBook();
+  questions.forEach((q, i) => {
+    const key = nameKey ? nameKey(i) : i;
+    const selected = answers[key];
+    if (selected && selected !== q.ans) {
+      const text = q.q || q.sentence || '';
+      if (book.some(w => w.q === text)) return;
+      book.push({ q: text, opts: q.opts, ans: q.ans, exp: q.exp, source, date: new Date().toLocaleDateString('zh-CN') });
+    }
+  });
+  if (book.length > 200) book.splice(0, book.length - 200);
+  localStorage.setItem('cet6_wrong', JSON.stringify(book));
+  renderWrongBook();
+}
+
+function renderWrongBook() {
+  const area = document.getElementById('wrong-book-area');
+  if (!area) return;
+  const book = loadWrongBook();
+  if (!book.length) {
+    area.innerHTML = '<p class="text-muted" style="font-size:0.88rem">暂无错题。答题后答错的客观题自动收录。</p>';
+    return;
+  }
+  area.innerHTML = book.slice().reverse().map((w, i) => `
+    <div class="wrong-item">
+      <div class="wrong-q">${w.q}</div>
+      <div style="font-size:0.83rem;margin-bottom:6px">${w.opts.join(' &nbsp; ')}</div>
+      <div class="wrong-ans">正确答案：${w.ans}</div>
+      <div class="wrong-exp">${w.exp}</div>
+      <div class="wrong-src">${w.source} · ${w.date}</div>
+    </div>`).join('') +
+    `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px">共 ${book.length} 道错题（最多保存200条）</p>`;
+}
+
+function clearWrongBook() {
+  if (!confirm('确定清空所有错题？')) return;
+  localStorage.removeItem('cet6_wrong');
+  renderWrongBook();
+}
+
 // ===== Quiz (基础模拟测试) =====
 // QUIZ_QUESTIONS is loaded from data/quiz.js (legacy quiz)
 let quizAnswers = {};
@@ -516,7 +649,8 @@ function submitQuiz() {
     <button class="btn btn-outline" style="margin-top:16px" onclick="resetQuiz()">再来一次</button>
   </div>`;
   res.scrollIntoView({behavior:'smooth'});
-  updateProgress(correct, QUIZ_QUESTIONS.length);
+  saveScore('基础词汇测试', correct, QUIZ_QUESTIONS.length);
+  addWrongAnswers(QUIZ_QUESTIONS, quizAnswers, '基础词汇测试', i => i);
 }
 
 function resetQuiz() {
@@ -557,6 +691,13 @@ function startMockSet(type, idx) {
   const area = document.getElementById('mock-practice-area');
   area.style.display = 'block';
   area.innerHTML = renderMockSet(type, set);
+  // start timer if enabled
+  const timerCheck = document.getElementById('timer-enable-check');
+  if (timerCheck && timerCheck.checked) {
+    const dur = parseInt(document.getElementById('timer-duration-select').value) || 1800;
+    const typeNames = { writing:'写作专项', reading:'阅读专项', translation:'翻译专项', vocab:'词汇专项', comprehensive:'综合专项' };
+    startTimer(dur, (typeNames[type]||type) + ' · ' + set.title);
+  }
   area.scrollIntoView({behavior:'smooth'});
 }
 
@@ -631,6 +772,7 @@ function renderMockReading(set) {
 function submitMockReading() {
   if (mockSubmitted) return;
   mockSubmitted = true;
+  stopTimer();
   const set = MOCK_TESTS[currentMockType][currentMockSet];
   let correct = 0;
   set.questions.forEach((q,i) => {
@@ -649,6 +791,8 @@ function submitMockReading() {
   res.innerHTML = `<div style="background:${pct>=80?'#d1fae5':'#fff7ed'};border-radius:8px;padding:16px;text-align:center">
     答对 <strong>${correct}/${set.questions.length}</strong> 题 · ${pct}分 ${pct>=80?'优秀！':'继续加油！'}
   </div>`;
+  saveScore('阅读·' + set.title, correct, set.questions.length);
+  addWrongAnswers(set.questions, mockAnswers, '阅读·' + set.title, i => i);
 }
 
 function renderMockTranslation(set) {
@@ -695,6 +839,7 @@ function renderMockVocab(set) {
 function submitMockVocab() {
   if (mockSubmitted) return;
   mockSubmitted = true;
+  stopTimer();
   const set = MOCK_TESTS[currentMockType][currentMockSet];
   let correct = 0;
   set.questions.forEach((q,i) => {
@@ -713,6 +858,8 @@ function submitMockVocab() {
   res.innerHTML = `<div style="background:${pct>=80?'#d1fae5':'#fff7ed'};border-radius:8px;padding:16px;text-align:center">
     答对 <strong>${correct}/${set.questions.length}</strong> 题 · ${pct}分 ${pct>=80?'优秀！':'继续加油！'}
   </div>`;
+  saveScore('词汇·' + set.title, correct, set.questions.length);
+  addWrongAnswers(set.questions, mockAnswers, '词汇·' + set.title, i => i);
 }
 
 function renderMockComprehensive(set) {
@@ -793,20 +940,16 @@ function submitMockComprehensive() {
     if (selected === q.ans) correct++;
     total++;
   });
+  const pct = Math.round(correct / total * 100);
   const res = document.getElementById('mock-comp-result');
   res.style.display = 'block';
-  res.innerHTML = `<div style="background:#d1fae5;border-radius:8px;padding:16px;text-align:center">
-    客观题答对 <strong>${correct}/${total}</strong> 题。写作和翻译请对照参考答案自评。
+  res.innerHTML = `<div style="background:${pct>=80?'#d1fae5':'#fff7ed'};border-radius:8px;padding:16px;text-align:center">
+    客观题答对 <strong>${correct}/${total}</strong> 题 · ${pct}分。写作和翻译请对照参考答案自评。
   </div>`;
-}
-
-// ===== Progress =====
-function updateProgress(done, total) {
-  const pct = Math.round(done/total*100);
-  const bar = document.getElementById('globalProgress');
-  const label = document.getElementById('progressLabel');
-  if (bar) bar.style.width = pct + '%';
-  if (label) label.textContent = done + ' / ' + total + ' 题已完成';
+  stopTimer();
+  saveScore('综合·' + set.title, correct, total);
+  addWrongAnswers(set.sections.reading.questions, mockAnswers, '综合阅读·' + set.title, i => 'r'+i);
+  addWrongAnswers(set.sections.vocab, mockAnswers, '综合词汇·' + set.title, i => 'v'+i);
 }
 
 // ===== Template Mounting =====

@@ -8,10 +8,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Planned
-- Complete overhaul of the mock test module (see [README § Next Steps](README.md#next-steps))
-
 ---
+
+## [0.3.0] - 2026-05-19
+
+### Added
+- **Mock test — countdown timer**: Optional timer on all mock sets. A floating bar at the top of the page shows remaining time; turns amber at 5 minutes and red at 1 minute. Supports pause/resume and manual stop. Duration choices: 30 / 60 / 80 / 130 minutes (full exam).
+- **Mock test — score history**: Every submitted mock test (reading, vocab, comprehensive, basic quiz) is saved to `localStorage` (`cet6_scores`). The quiz page shows the 20 most recent results as a colour-coded bar chart (green ≥ 80%, amber ≥ 60%, red < 60%).
+- **Mock test — wrong-answer notebook**: Wrong answers from all objective-question mock tests are automatically collected into `localStorage` (`cet6_wrong`, max 200 entries). The quiz page shows each wrong question with the correct answer and explanation. Both the score history and wrong-answer notebook have a clear button.
+
+### Changed
+- **Mock test — reading passages**: All 10 reading sets rewritten to 380–432 words (4–5 paragraphs). Questions now mix inference, vocabulary-in-context, author attitude, and main idea — none answerable by simple keyword matching.
+- **Mock test — vocab questions**: All 100 vocab questions rewritten so the correct answer word does not appear in the sentence. All four options are plausible CET-6 level words.
+- **Mock test — comprehensive sections**: Reading passages expanded to 290–330 words with 5 questions each (up from ~100 words / 3 questions). Vocab sections expanded to 5 questions each (up from 2).
+- **Header**: Removed the 复习进度 progress bar from the top-right corner of the header.
 
 ## [0.2.0] - 2026-05-19
 
