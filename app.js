@@ -7,6 +7,10 @@ function showPage(name) {
   const pageMap = ['home','outline','writing','listening','reading','translation','vocab','quiz'];
   const idx = pageMap.indexOf(name);
   if (idx >= 0) navBtns[idx].classList.add('active');
+  // sync home quick-nav buttons
+  document.querySelectorAll('.home-nav-btn').forEach(b => b.classList.remove('active'));
+  const hBtn = document.getElementById('hnav-' + name);
+  if (hBtn) hBtn.classList.add('active');
   if (name === 'vocab') renderVocab('all');
   if (name === 'reading') initReadingPage();
   if (name === 'translation') initTranslationPage();
@@ -86,6 +90,14 @@ function toggleAccordion(header) {
   const arrow = header.querySelector('.accordion-arrow');
   body.classList.toggle('open');
   arrow.classList.toggle('open');
+}
+
+function toggleVocabGroup(header) {
+  const body = header.nextElementSibling;
+  const arrow = header.querySelector('.vocab-arrow');
+  const isOpen = body.style.display !== 'none';
+  body.style.display = isOpen ? 'none' : 'block';
+  arrow.textContent = isOpen ? '▶' : '▼';
 }
 
 // ===== Cloze =====
@@ -360,6 +372,45 @@ function clearWordbook() {
   wordbookWords.clear();
   saveSet(VC_WORDBOOK_KEY, wordbookWords);
   showWordbook();
+}
+
+function showMastered() {
+  const modal = document.getElementById('mastered-modal');
+  const list = document.getElementById('mastered-list');
+  const count = document.getElementById('ms-count');
+  const words = [...masteredWords].sort();
+  count.textContent = words.length + ' 词';
+  if (words.length === 0) {
+    list.innerHTML = '<p class="text-muted" style="text-align:center;padding:20px">还没有标记为已掌握的单词</p>';
+  } else {
+    const entries = words.map(w => VOCAB_DATA.find(v => v.word === w)).filter(Boolean);
+    list.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px">` +
+      entries.map(v => `
+        <div style="background:#f0fdf4;border-radius:8px;padding:12px;border:1px solid #bbf7d0">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start">
+            <div>
+              <span style="font-weight:700;color:var(--primary)">${v.word}</span>
+              <span style="font-size:0.78rem;color:var(--text-muted);margin-left:6px">${v.pos}</span>
+            </div>
+            <button style="background:none;border:1px solid var(--warning);color:var(--warning);border-radius:6px;padding:2px 8px;cursor:pointer;font-size:0.78rem" onclick="unmarkMastered('${v.word.replace(/'/g,"\\'")}')">撤回</button>
+          </div>
+          <div style="font-size:0.78rem;color:var(--text-muted);margin-bottom:3px">${v.phonetic ? '[' + v.phonetic + ']' : ''}</div>
+          <div style="margin-bottom:4px">${examLabel(v.exam)}${sourceLabel(v.source)}</div>
+          <div style="font-size:0.85rem;margin-top:4px">${v.meaning}</div>
+        </div>`).join('') + '</div>';
+  }
+  modal.style.display = 'block';
+}
+
+function closeMastered() {
+  document.getElementById('mastered-modal').style.display = 'none';
+}
+
+function unmarkMastered(word) {
+  masteredWords.delete(word);
+  saveSet(VC_MASTERED_KEY, masteredWords);
+  updateVocabStats();
+  showMastered();
 }
 
 function exportWordbook() {
@@ -933,14 +984,17 @@ function renderSectionB(exam, container) {
     }
   }
 
+  // Detect how many paragraph letters exist in this article
+  const paraLetters = [...new Set([...sb.article.matchAll(/\b([A-P])\. /g)].map(m => m[1]))].sort();
+  const optionsHtml = `<option value="">— 选择段落 —</option>` +
+    paraLetters.map(l => `<option value="${l}">${l}</option>`).join('');
+
   const stmtsHtml = sb.statements.map(s => `
-    <div class="quiz-question" style="margin-bottom:12px">
-      <p style="margin-bottom:6px">${s.num}. ${s.statement}</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        ${'ABCDEFGHIJKLMN'.split('').map(l =>
-          `<label style="cursor:pointer"><input type="radio" name="sb_${s.num}" value="${l}" style="margin-right:4px">${l}</label>`
-        ).join('')}
-      </div>
+    <div class="quiz-question sb-row" data-num="${s.num}" style="display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;padding:8px 10px;border-radius:6px;background:#f8fafc">
+      <select name="sb_${s.num}" class="sb-select" style="flex-shrink:0;width:120px;padding:4px 6px;border:1px solid #cbd5e1;border-radius:6px;font-size:0.9rem;cursor:pointer">
+        ${optionsHtml}
+      </select>
+      <span style="font-size:0.92rem;line-height:1.6">${s.num}. ${s.statement}</span>
     </div>`).join('');
 
   container.innerHTML = `
@@ -963,27 +1017,28 @@ function checkSectionB() {
   const exam = READING_EXAMS[currentReadingExam];
   const ans = exam.answers && exam.answers.sectionB;
   let correct = 0, total = 0;
-  for (let n = 36; n <= 45; n++) {
-    const checked = document.querySelector(`[name="sb_${n}"]:checked`);
-    if (!checked) continue;
+  document.querySelectorAll('.sb-row').forEach(row => {
+    const sel = row.querySelector('.sb-select');
+    if (!sel || !sel.value) return;
+    const n = parseInt(row.dataset.num);
     total++;
-    if (ans && ans[n]) {
-      const isCorrect = checked.value === ans[n];
-      const row = checked.closest('.quiz-question');
-      row.style.background = isCorrect ? '#d1fae5' : '#fee2e2';
-      row.style.borderRadius = '6px';
-      row.style.padding = '8px';
-      if (isCorrect) correct++;
-      else if (ans[n]) {
-        // Show correct answer
-        const hint = row.querySelector('.ans-hint') || document.createElement('span');
+    const isCorrect = ans && ans[n] && sel.value === ans[n];
+    row.style.background = isCorrect ? '#d1fae5' : '#fee2e2';
+    if (isCorrect) {
+      correct++;
+      const old = row.querySelector('.ans-hint');
+      if (old) old.remove();
+    } else if (ans && ans[n]) {
+      let hint = row.querySelector('.ans-hint');
+      if (!hint) {
+        hint = document.createElement('span');
         hint.className = 'ans-hint';
-        hint.style.cssText = 'color:#065f46;font-size:0.85em;margin-left:8px';
-        hint.textContent = '正确答案：' + ans[n];
-        if (!row.querySelector('.ans-hint')) row.appendChild(hint);
+        hint.style.cssText = 'color:#065f46;font-size:0.82em;white-space:nowrap';
+        sel.insertAdjacentElement('afterend', hint);
       }
+      hint.textContent = '✓ ' + ans[n];
     }
-  }
+  });
   const res = document.getElementById('secb-result');
   res.style.display = 'block';
   if (ans) {
@@ -995,11 +1050,10 @@ function checkSectionB() {
 }
 
 function resetSectionB() {
-  document.querySelectorAll('[name^="sb_"]').forEach(r => r.checked = false);
-  document.querySelectorAll('.quiz-question').forEach(r => {
-    r.style.background = '';
-    r.style.padding = '';
-    const hint = r.querySelector('.ans-hint');
+  document.querySelectorAll('.sb-select').forEach(sel => sel.value = '');
+  document.querySelectorAll('.sb-row').forEach(row => {
+    row.style.background = '#f8fafc';
+    const hint = row.querySelector('.ans-hint');
     if (hint) hint.remove();
   });
   const res = document.getElementById('secb-result');

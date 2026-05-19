@@ -23,7 +23,7 @@
 
 <nav>
   <button class="active" onclick="showPage('home')">🏠 首页</button>
-  <button onclick="showPage('outline')">📋 复习要点</button>
+  <button onclick="showPage('outline')">📋 备考技巧</button>
   <button onclick="showPage('writing')">✍️ 作文</button>
   <button onclick="showPage('listening')">🎧 听力</button>
   <button onclick="showPage('reading')">📖 阅读</button>
@@ -36,6 +36,33 @@
 
 <!-- ===== HOME PAGE ===== -->
 <div id="page-home" class="page active">
+
+  <div class="card" style="margin-bottom:16px">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      <button class="home-nav-btn" id="hnav-outline" onclick="showPage('outline')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">📋</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">备考技巧</div>
+      </button>
+      <button class="home-nav-btn" id="hnav-writing" onclick="showPage('writing')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">✍️</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">作文</div>
+      </button>
+      <button class="home-nav-btn" id="hnav-listening" onclick="showPage('listening')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">🎧</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">听力</div>
+      </button>
+      <button class="home-nav-btn" id="hnav-reading" onclick="showPage('reading')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">📖</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">阅读</div>
+      </button>
+      <button class="home-nav-btn" id="hnav-translation" onclick="showPage('translation')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">🔄</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">翻译</div>
+      </button>
+      <button class="home-nav-btn" id="hnav-vocab" onclick="showPage('vocab')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">📝</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">词汇</div>
+      </button>
+      <button class="home-nav-btn" id="hnav-quiz" onclick="showPage('quiz')" style="width:100%;padding:12px 6px">
+        <div style="font-size:1.2rem">🎯</div><div style="font-weight:700;margin-top:2px;font-size:0.85rem">模拟测试</div>
+      </button>
+    </div>
+  </div>
+
   <div class="grid-4" style="margin-bottom:24px">
     <div class="stat-card"><div class="icon">✍️</div><div class="value">15%</div><div class="label">作文 Writing</div></div>
     <div class="stat-card"><div class="icon">🎧</div><div class="value">35%</div><div class="label">听力 Listening</div></div>
@@ -61,67 +88,39 @@
     </div>
 
     <div class="card">
-      <h2>🔥 近三年高频主题</h2>
-      <h3>作文高频话题</h3>
-      <div>
-        <span class="tag tag-blue">人工智能</span><span class="tag tag-blue">科技伦理</span>
-        <span class="tag tag-green">绿色发展</span><span class="tag tag-green">生态文明</span>
-        <span class="tag tag-orange">文化传承</span><span class="tag tag-orange">文化自信</span>
-        <span class="tag tag-purple">心理健康</span><span class="tag tag-purple">终身学习</span>
-        <span class="tag tag-red">乡村振兴</span><span class="tag tag-red">社会责任</span>
+      <h2>🔥 2023–2025 高频主题</h2>
+      <h3>作文（续写题）</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">
+        <span class="tag tag-blue">个人成长/自律</span>
+        <span class="tag tag-blue">AI与创造力</span>
+        <span class="tag tag-green">志愿服务</span>
+        <span class="tag tag-green">社会责任</span>
+        <span class="tag tag-orange">文化自信</span>
+        <span class="tag tag-orange">中国梦/青年担当</span>
+        <span class="tag tag-purple">心理健康</span>
+        <span class="tag tag-purple">终身学习</span>
+        <span class="tag tag-red">乡村振兴</span>
+        <span class="tag tag-red">职业准备</span>
+        <span class="tag tag-blue">数字素养</span>
+        <span class="tag tag-green">师生关系</span>
       </div>
-      <h3>翻译高频主题</h3>
-      <div>
-        <span class="tag tag-orange">中国传统文化</span><span class="tag tag-blue">科技成就</span>
-        <span class="tag tag-green">历史地理</span><span class="tag tag-purple">社会发展</span>
+      <h3>翻译</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;margin-bottom:10px">
+        <span class="tag tag-orange">传统美德/尊老</span>
+        <span class="tag tag-blue">航天/5G/AI</span>
+        <span class="tag tag-green">乡村振兴</span>
+        <span class="tag tag-orange">自强自立精神</span>
+        <span class="tag tag-purple">传统节日/文化</span>
+        <span class="tag tag-blue">一带一路</span>
       </div>
-      <h3>阅读高频话题</h3>
-      <div>
-        <span class="tag tag-blue">AI与社会</span><span class="tag tag-green">环境科学</span>
-        <span class="tag tag-purple">心理学研究</span><span class="tag tag-orange">经济发展</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>⚡ 快速导航</h2>
-    <div class="grid-4">
-      <button class="btn btn-primary" onclick="showPage('outline')" style="width:100%">📋 查看复习要点</button>
-      <button class="btn btn-outline" onclick="showPage('writing')" style="width:100%">✍️ 作文练习</button>
-      <button class="btn btn-outline" onclick="showPage('translation')" style="width:100%">🔄 翻译练习</button>
-      <button class="btn btn-outline" onclick="showPage('quiz')" style="width:100%">🎯 模拟测试</button>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📅 备考时间规划建议</h2>
-    <div class="grid-3">
-      <div style="background:#eff6ff;border-radius:8px;padding:16px">
-        <div style="font-weight:700;color:var(--primary);margin-bottom:8px">考前4-8周</div>
-        <ul class="styled">
-          <li>系统学习各题型解题技巧</li>
-          <li>每天背诵30-50个六级词汇</li>
-          <li>精读近三年真题文章</li>
-          <li>每周写1-2篇作文</li>
-        </ul>
-      </div>
-      <div style="background:#f0fdf4;border-radius:8px;padding:16px">
-        <div style="font-weight:700;color:var(--success);margin-bottom:8px">考前2-4周</div>
-        <ul class="styled">
-          <li>完整套题模拟训练</li>
-          <li>重点攻克薄弱题型</li>
-          <li>翻译专项练习（中国文化主题）</li>
-          <li>听力每天精听30分钟</li>
-        </ul>
-      </div>
-      <div style="background:#fff7ed;border-radius:8px;padding:16px">
-        <div style="font-weight:700;color:var(--warning);margin-bottom:8px">考前1-2周</div>
-        <ul class="styled">
-          <li>回顾错题，总结规律</li>
-          <li>背诵作文模板和高分句型</li>
-          <li>复习翻译高频词汇表</li>
-          <li>保持状态，不要过度疲劳</li>
-        </ul>
+      <h3>阅读</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:5px">
+        <span class="tag tag-blue">AI与社会</span>
+        <span class="tag tag-green">心理学研究</span>
+        <span class="tag tag-orange">社会公平/种族</span>
+        <span class="tag tag-purple">科技伦理</span>
+        <span class="tag tag-red">餐饮/机器人</span>
+        <span class="tag tag-blue">人际关系</span>
       </div>
     </div>
   </div>
@@ -130,162 +129,118 @@
 <!-- ===== OUTLINE PAGE ===== -->
 <div id="page-outline" class="page">
   <div class="card">
-    <h2>📋 六级复习要点总纲（近三年规律）</h2>
-    <p class="text-muted">基于2022-2024年真题分析，按重要程度标注 <span class="priority-high">★★★高频</span> / <span class="priority-mid">★★中频</span></p>
+    <h2>📋 六级备考技巧总纲</h2>
+    <p class="text-muted">基于2023–2025年真题规律，聚焦答题技巧与积累方法，按板块分类。</p>
   </div>
 
   <div class="grid-2">
+    <!-- 作文 -->
     <div class="card">
-      <h2>✍️ 作文复习要点</h2>
+      <h2>✍️ 作文（15%）</h2>
       <div class="outline-section">
-        <h3>题型规律</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 图画作文（约占60%）：描述→寓意→观点三段式</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 议论文（约占30%）：引出→论证→总结三段式</div>
-        <div class="outline-item"><span class="priority-mid">★★</span> 图表作文（约占10%）：描述趋势→分析原因→展望</div>
+        <h3>题型现状（2023年起）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 全部为<b>续写题</b>：给出首句，展开150–200词</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 不再考图画/图表作文，旧模板无效</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 主题集中：个人成长、社会责任、科技与人、文化自信</div>
       </div>
       <div class="outline-section">
-        <h3>高频主题（必备）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 科技与社会：AI、数字化、科技伦理</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 绿色发展：环保、可持续、碳中和</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 文化传承：传统文化保护、文化自信</div>
-        <div class="outline-item"><span class="priority-mid">★★</span> 心理健康：压力、韧性、心理素质</div>
-        <div class="outline-item"><span class="priority-mid">★★</span> 教育发展：终身学习、素质教育</div>
-        <div class="outline-item"><span class="priority-mid">★★</span> 社会责任：志愿服务、乡村振兴</div>
+        <h3>答题技巧</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>第二句决定成败</b>：必须直接承接首句，不能另起话题或重复首句</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>三段结构</b>：承接首句（25词）→ 举例论证（80词）→ 总结展望（35词）</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>字数</b>：写到175–185词最稳，低于150词明显扣分</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 每段只有一个核心论点，不要在一段里堆砌多个观点</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 结尾必须有明确立场，用 Only by... / It is high time... 收尾</div>
+        <div class="outline-item">避免：important/good/big 等简单词重复超过2次</div>
       </div>
       <div class="outline-section">
-        <h3>写作技巧要点</h3>
-        <div class="outline-item">开头：避免直白，用引用/数据/现象引入</div>
-        <div class="outline-item">主体：每段一个论点，用具体例子支撑</div>
-        <div class="outline-item">结尾：升华主题，提出建议或展望</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 字数：150-200词，不少于150词</div>
-        <div class="outline-item">避免：中式英语、简单句堆砌、重复用词</div>
+        <h3>积累方法</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 每周背3–5个高频主题的<b>核心句型</b>，考场直接套用</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 准备5–6个万能例子（马云创业、疫情志愿者、嫦娥工程等），可跨主题使用</div>
+        <div class="outline-item">每次练习后对照范文，找出自己的词汇替换空间</div>
       </div>
     </div>
 
+    <!-- 翻译 -->
     <div class="card">
-      <h2>🔄 翻译复习要点</h2>
+      <h2>🔄 翻译（15%）</h2>
       <div class="outline-section">
         <h3>题型规律</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 100%为汉译英段落翻译，约140-180字</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 主题几乎全为中国文化/历史/科技/社会</div>
-        <div class="outline-item">时间30分钟，建议25分钟完成留5分钟检查</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 100%汉译英，约140–180字，主题锁定中国文化/科技/社会</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 近三年主题：尊老、自强、乡村振兴、航天、5G、传统美德</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 建议用时：25分钟翻译 + 5分钟检查语法和拼写</div>
       </div>
       <div class="outline-section">
-        <h3>高频主题（必备）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 中国传统文化：茶、书法、中医、节日、园林</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 历史地理：丝绸之路、长城、古代文明</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 科技成就：高铁、航天、新能源、5G</div>
-        <div class="outline-item"><span class="priority-mid">★★</span> 社会发展：乡村振兴、脱贫攻坚、一带一路</div>
-        <div class="outline-item"><span class="priority-mid">★★</span> 饮食文化：八大菜系、饮食哲学</div>
+        <h3>答题技巧</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>先通读全段</b>，理解整体逻辑再动笔，不要逐句硬译</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>长句拆分</b>：中文一个长句 → 英文2–3个短句，主从句结合</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>四字成语意译</b>：博大精深 → extensive and profound，不要字对字翻</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 主语转换："人们认为" → It is believed that / People hold that</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 被动句活用："得到广泛传承" → be widely passed down / inherited</div>
+        <div class="outline-item">文化专有名词：优先用官方译名（见翻译板块词汇表）</div>
       </div>
       <div class="outline-section">
-        <h3>翻译技巧要点</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 四字成语：意译为主，必要时加括号解释</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 长句拆分：中文长句→英文多个短句</div>
-        <div class="outline-item">被动转换："人们认为"→"It is believed that"</div>
-        <div class="outline-item">文化专有名词：保留拼音+括号英文解释</div>
-        <div class="outline-item">数量词：数千年→thousands of years/millennia</div>
+        <h3>积累方法</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 背熟翻译板块的<b>高频动词短语</b>（深植于/举世瞩目/不懈奋斗等）</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 每周精翻1套真题，对照参考译文找差距，重点看句式处理</div>
+        <div class="outline-item">积累"中国特色"固定译法，考场遇到直接写，不要现场造词</div>
       </div>
     </div>
   </div>
 
   <div class="grid-2">
+    <!-- 阅读 -->
     <div class="card">
-      <h2>📖 阅读复习要点</h2>
+      <h2>📖 阅读（35%）</h2>
       <div class="outline-section">
-        <h3>选词填空（Banked Cloze）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 15选10，注意词性和搭配</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 高频动词：facilitate/enhance/undermine/foster</div>
-        <div class="outline-item">先通读全文，再根据语境选词</div>
-        <div class="outline-item">注意固定搭配：attribute to, contribute to</div>
+        <h3>Section A 选词填空</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>先看词库词性</b>：15个词先按词性分组（动词/名词/形容词），缩小选择范围</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>通读全文再填</b>：先读完全文理解大意，再逐空填写，不要读一句填一句</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 优先填有把握的空，最后再处理难空，避免卡在一题上</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 注意固定搭配：attribute to / contribute to / result in / lead to</div>
+        <div class="outline-item">剩余词可用排除法，5个未用词中找最合适的</div>
       </div>
       <div class="outline-section">
-        <h3>长篇阅读（匹配题）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 先读题干关键词，再扫描段落首句</div>
-        <div class="outline-item">注意同义替换，正确答案≠原文照搬</div>
-        <div class="outline-item">一段可对应多题，不要排除已用段落</div>
-        <div class="outline-item">时间控制：约15分钟完成</div>
+        <h3>Section B 长篇匹配</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>先读题干</b>，划出每句的核心名词/动词，再去段落中定位</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>同义替换</b>是关键：题干用 "reduce"，原文可能是 "decrease / cut / lower"</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 段落首句和末句优先看，主旨信息集中在此</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 一个段落可对应多道题，不要因为用过就排除</div>
+        <div class="outline-item">时间控制在15分钟内，不确定的先跳过，最后回头处理</div>
       </div>
       <div class="outline-section">
-        <h3>仔细阅读（精读）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 细节题（40%）：定位关键词，原文找答案</div>
-        <div class="outline-item"><span class="priority-high">★★★</span> 推断题（25%）：不能超出文章范围</div>
-        <div class="outline-item">警惕绝对词：always/never/only→多为错误选项</div>
-        <div class="outline-item">转折词后（but/however）常是考点</div>
+        <h3>Section C 仔细阅读</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>先读题再读文</b>：带着问题读文章，定位效率高3倍</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>转折词后必考</b>：but / however / yet / while 后面的内容是答案重点</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> 警惕绝对词：选项含 always / never / only / all → 大概率是干扰项</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 推断题不能超出文章范围，答案必须有原文依据</div>
+        <div class="outline-item">主旨题：看首段首句 + 末段末句，不要被细节带偏</div>
       </div>
     </div>
 
+    <!-- 听力 -->
     <div class="card">
-      <h2>🎧 听力复习要点</h2>
+      <h2>🎧 听力（35%）</h2>
       <div class="outline-section">
-        <h3>长对话（Long Conversations）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 高频场景：求职、学术、旅行、健康</div>
-        <div class="outline-item">注意转折词后的信息（but/actually/however）</div>
-        <div class="outline-item">说话人语气→态度题答案</div>
-      </div>
-      <div class="outline-section">
-        <h3>听力篇章（Passages）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 首句=主旨句，重点听</div>
-        <div class="outline-item">数字、时间、地名是细节题常考点</div>
-        <div class="outline-item">高频话题：社会现象、科普知识、历史文化</div>
+        <h3>通用技巧（所有题型）</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>预读选项</b>：每题播放前有约8秒，快速扫选项，锁定关键词</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>同义替换</b>：正确答案几乎不原词复现，是原文的改写版本</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>首尾原则</b>：短对话答案多在最后一句，长对话答案多在段落开头</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 数字敏感：时间/金额/距离/比例是高频细节考点，听到立刻记</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 转折词后（but/actually/however）的信息往往推翻前面，是答案所在</div>
       </div>
       <div class="outline-section">
-        <h3>讲座/报道（Lectures）</h3>
-        <div class="outline-item"><span class="priority-high">★★★</span> 难度最高，注意论点结构</div>
-        <div class="outline-item">信号词：first/second/however/therefore</div>
-        <div class="outline-item">最后一题常考主旨或说话人目的</div>
-        <div class="outline-item">备考：每天精听VOA/BBC慢速英语</div>
+        <h3>长对话 &amp; 讲座专项</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> 听到 "The point is / What I mean is / In other words" → 答案来了</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 态度题：语气词（I'm afraid / Unfortunately / That's great）直接给答案</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 讲座最后一题常考主旨或说话人目的，听完整段再选</div>
+        <div class="outline-item">建议类题目：听到 suggest / recommend / why not / had better → 答案紧随</div>
       </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <h2>📚 词汇复习要点</h2>
-    <div class="grid-3">
-      <div>
-        <h3>高频动词（必背）</h3>
-        <ul class="styled">
-          <li><strong>facilitate</strong> 促进/便利</li>
-          <li><strong>enhance</strong> 增强/提高</li>
-          <li><strong>undermine</strong> 削弱/破坏</li>
-          <li><strong>foster</strong> 培养/促进</li>
-          <li><strong>alleviate</strong> 减轻/缓解</li>
-          <li><strong>exacerbate</strong> 加剧/恶化</li>
-          <li><strong>advocate</strong> 倡导/支持</li>
-          <li><strong>acknowledge</strong> 承认/认可</li>
-          <li><strong>implement</strong> 实施/执行</li>
-          <li><strong>attribute to</strong> 归因于</li>
-        </ul>
-      </div>
-      <div>
-        <h3>高频形容词（必背）</h3>
-        <ul class="styled">
-          <li><strong>prevalent</strong> 普遍的</li>
-          <li><strong>substantial</strong> 大量的/实质的</li>
-          <li><strong>inevitable</strong> 不可避免的</li>
-          <li><strong>sustainable</strong> 可持续的</li>
-          <li><strong>vulnerable</strong> 脆弱的</li>
-          <li><strong>comprehensive</strong> 全面的</li>
-          <li><strong>innovative</strong> 创新的</li>
-          <li><strong>controversial</strong> 有争议的</li>
-          <li><strong>empirical</strong> 实证的</li>
-          <li><strong>demographic</strong> 人口统计的</li>
-        </ul>
-      </div>
-      <div>
-        <h3>高频名词（必背）</h3>
-        <ul class="styled">
-          <li><strong>initiative</strong> 倡议/主动性</li>
-          <li><strong>perspective</strong> 观点/视角</li>
-          <li><strong>implication</strong> 含义/影响</li>
-          <li><strong>mechanism</strong> 机制</li>
-          <li><strong>framework</strong> 框架</li>
-          <li><strong>inequality</strong> 不平等</li>
-          <li><strong>resilience</strong> 韧性/恢复力</li>
-          <li><strong>biodiversity</strong> 生物多样性</li>
-          <li><strong>entrepreneurship</strong> 创业精神</li>
-          <li><strong>correlation</strong> 相关性</li>
-        </ul>
+      <div class="outline-section">
+        <h3>积累方法</h3>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>精听</b>：每天15分钟，选一段真题听力，先听后对照原文，找出听漏的词</div>
+        <div class="outline-item"><span class="priority-high">★★★</span> <b>场景词汇</b>：提前背熟听力板块的6组高频词，遇到熟悉词反应快一倍</div>
+        <div class="outline-item"><span class="priority-mid">★★</span> 泛听：通勤/睡前听BBC/VOA慢速英语，培养语感，不必逐词理解</div>
+        <div class="outline-item">做完真题后必须复听：找出答错原因是没听到还是没听懂</div>
       </div>
     </div>
   </div>
@@ -295,66 +250,110 @@
 <div id="page-writing" class="page">
   <div class="card">
     <h2>✍️ 作文板块总览</h2>
-    <p class="text-muted">作文占总分15%，时间30分钟，要求150-200词。题型以图画作文、议论文、图表作文为主。</p>
+    <p class="text-muted">作文占总分15%，时间30分钟，要求150-200词。2023年起全部为续写题型（给出首句展开）。</p>
   </div>
 
   <!-- 常考点分析 -->
   <div class="card">
-    <h2>🔥 常考点与重难点分析</h2>
+    <h2>🔥 真题规律分析与备考建议</h2>
     <div class="grid-2">
       <div>
-        <h3>题型分布（近三年）</h3>
+        <h3>题型分布（2023–2025年，18套）</h3>
         <table>
-          <tr><th>题型</th><th>占比</th><th>代表年份</th></tr>
-          <tr><td>图画作文</td><td>~44%</td><td>2024/6、2023/6、2022/6</td></tr>
-          <tr><td>议论文</td><td>~33%</td><td>2024/6、2023/12、2023/6</td></tr>
-          <tr><td>图表作文</td><td>~22%</td><td>2023/12、2022/12</td></tr>
+          <tr><th>题型</th><th>套数</th><th>代表年份</th></tr>
+          <tr><td>续写作文（给首句）</td><td>18套</td><td>2023–2025全部</td></tr>
+          <tr><td>个人经历/观点类</td><td>~11套</td><td>2024/12、2025/6等</td></tr>
+          <tr><td>社会现象/趋势类</td><td>~7套</td><td>2023/12、2024/6等</td></tr>
         </table>
+        <div style="background:#fef9c3;border-radius:8px;padding:10px;margin-top:10px;font-size:0.85rem">
+          ⚠️ <b>2023年起全面改为续写题型</b>：给出首句，要求展开150–200词。不再考图画/图表作文。
+        </div>
+
         <h3 style="margin-top:16px">高频主题（必备）</h3>
         <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
-          <span class="tag tag-blue">人工智能与就业</span>
-          <span class="tag tag-blue">科技伦理</span>
-          <span class="tag tag-green">绿色消费/环保</span>
-          <span class="tag tag-green">可持续发展</span>
+          <span class="tag tag-blue">个人成长/自律</span>
+          <span class="tag tag-blue">AI与就业/创造力</span>
+          <span class="tag tag-green">社会责任/志愿服务</span>
+          <span class="tag tag-green">可持续发展/环保</span>
           <span class="tag tag-orange">文化传承与自信</span>
-          <span class="tag tag-orange">传统文化保护</span>
+          <span class="tag tag-orange">中国梦/青年担当</span>
           <span class="tag tag-purple">心理健康/学业压力</span>
-          <span class="tag tag-purple">终身学习</span>
-          <span class="tag tag-red">乡村振兴</span>
-          <span class="tag tag-red">社会责任</span>
-          <span class="tag tag-blue">网络社交</span>
-          <span class="tag tag-green">体育精神</span>
+          <span class="tag tag-purple">终身学习/批判思维</span>
+          <span class="tag tag-red">乡村振兴/社会公平</span>
+          <span class="tag tag-red">网络社交/数字素养</span>
+          <span class="tag tag-blue">教育目标/师生关系</span>
+          <span class="tag tag-green">职业准备/独立学习</span>
+        </div>
+
+        <h3 style="margin-top:16px">真题首句规律（2023–2025）</h3>
+        <div class="accordion">
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 首句句型模式归纳 <span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.88rem;line-height:1.8">
+            <b>模式1：现象+重要性</b>（最常见，约60%）<br>
+            → "Nowadays, more and more... have realized the importance of..."<br>
+            → "There is a growing awareness that..."<br><br>
+            <b>模式2：条件+结论</b>（约25%）<br>
+            → "To increase the likelihood of..., one should..."<br>
+            → "Living in an increasingly competitive world, college students should..."<br><br>
+            <b>模式3：普遍认知</b>（约15%）<br>
+            → "It is widely accepted that..."<br>
+            → "It is believed that..."<br><br>
+            <span style="color:var(--danger)">⚠️ 策略：首句已给定，第二句必须直接呼应首句，不要重复首句意思。</span>
+          </div>
         </div>
       </div>
+
       <div>
-        <h3>重难点突破</h3>
+        <h3>续写作文结构建议（基于真题）</h3>
         <div class="accordion">
-          <div class="accordion-header" onclick="toggleAccordion(this)">📌 图画作文三段式结构 <span class="accordion-arrow">▼</span></div>
-          <div class="accordion-body open" style="font-size:0.9rem">
-            <b>第一段（描述图画）：</b>As is vividly depicted in the picture...<br>
-            <b>第二段（阐释寓意）：</b>The picture is intended to convey the message that...<br>
-            <b>第三段（表达观点）：</b>In my opinion... / From my perspective...<br>
-            <span style="color:var(--danger)">⚠️ 重点：第二段占分最重，需展开论述，不少于80词</span>
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 三段式黄金结构 <span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.9rem;line-height:1.8">
+            <b>第一段（承接首句，25–35词）：</b><br>
+            直接展开首句观点，给出1–2个原因或背景，不重复首句。<br>
+            <span style="color:var(--primary)">例：首句谈自律重要性 → 第一段说明为何自律在当今尤为关键</span><br><br>
+            <b>第二段（论证，70–90词）：</b><br>
+            举1–2个具体例子或数据支撑，可用个人经历或社会现象。<br>
+            <span style="color:var(--primary)">例：举出自律带来学业/职业成功的具体案例</span><br><br>
+            <b>第三段（结论，30–40词）：</b><br>
+            总结观点，展望未来，呼应首句主题词。<br>
+            <span style="color:var(--danger)">⚠️ 结尾必须有明确立场，不能模棱两可</span>
           </div>
         </div>
         <div class="accordion" style="margin-top:8px">
-          <div class="accordion-header" onclick="toggleAccordion(this)">📌 议论文常见失分点 <span class="accordion-arrow">▼</span></div>
-          <div class="accordion-body open" style="font-size:0.9rem">
-            <b>1. 立场不明确</b>——开头或结尾必须明确表态<br>
-            <b>2. 论据空洞</b>——需举具体例子或数据支撑<br>
-            <b>3. 词汇重复</b>——同一词不超过2次，多用同义替换<br>
-            <b>4. 字数不足</b>——低于150词扣分，建议写到180词
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 高频失分点（真题阅卷反馈）<span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.9rem;line-height:1.8">
+            <b>1. 与首句脱节</b>——第二句必须直接承接首句，不能另起话题<br>
+            <b>2. 论据空洞</b>——"It is important"反复出现，无具体支撑<br>
+            <b>3. 词汇重复</b>——important/good/big 等简单词出现3次以上扣分<br>
+            <b>4. 字数不足</b>——低于150词明显扣分，建议写到175–185词<br>
+            <b>5. 语法错误集中</b>——主谓一致、时态、冠词是最常见错误<br>
+            <b>6. 结尾仓促</b>——最后一段只有一句话，缺乏展望或呼应
           </div>
         </div>
         <div class="accordion" style="margin-top:8px">
           <div class="accordion-header" onclick="toggleAccordion(this)">📌 高分词汇替换表 <span class="accordion-arrow">▼</span></div>
-          <div class="accordion-body open" style="font-size:0.9rem">
-            think → contend / argue / maintain<br>
-            important → crucial / vital / paramount<br>
-            show → demonstrate / reveal / indicate<br>
-            problem → challenge / dilemma / issue<br>
-            because → owing to / due to / in light of<br>
-            many → a multitude of / numerous / a host of
+          <div class="accordion-body open" style="font-size:0.9rem;line-height:1.8">
+            think → <b>contend / argue / maintain / hold</b><br>
+            important → <b>crucial / vital / paramount / indispensable</b><br>
+            show → <b>demonstrate / reveal / indicate / suggest</b><br>
+            problem → <b>challenge / dilemma / issue / obstacle</b><br>
+            because → <b>owing to / due to / in light of / given that</b><br>
+            many → <b>a multitude of / numerous / a host of / countless</b><br>
+            improve → <b>enhance / boost / elevate / foster</b><br>
+            help → <b>facilitate / contribute to / enable / empower</b><br>
+            need → <b>necessitate / call for / demand / require</b><br>
+            get → <b>acquire / obtain / attain / gain</b>
+          </div>
+        </div>
+        <div class="accordion" style="margin-top:8px">
+          <div class="accordion-header" onclick="toggleAccordion(this)">📌 加分句式（直接套用）<span class="accordion-arrow">▼</span></div>
+          <div class="accordion-body open" style="font-size:0.88rem;line-height:2">
+            <b>举例：</b>A case in point is... / Take ... as an example...<br>
+            <b>让步转折：</b>Admittedly, ...; however, ...<br>
+            <b>强调：</b>What deserves special attention is that...<br>
+            <b>递进：</b>Not only..., but also... / Beyond that,...<br>
+            <b>结尾展望：</b>Only by ... can we truly ...<br>
+            <b>引用式开头：</b>As the saying goes, "..." This is especially true when it comes to...
           </div>
         </div>
       </div>
@@ -489,41 +488,135 @@
 
   <div class="card">
     <h2>📋 听力高频词汇</h2>
-    <div class="grid-3">
-      <div>
-        <h3>学术/科研类</h3>
-        <table>
-          <tr><th>英文</th><th>中文</th></tr>
-          <tr><td>hypothesis</td><td>假设</td></tr>
-          <tr><td>methodology</td><td>研究方法</td></tr>
-          <tr><td>findings</td><td>研究结果</td></tr>
-          <tr><td>significant</td><td>显著的</td></tr>
-          <tr><td>correlation</td><td>相关性</td></tr>
-          <tr><td>implication</td><td>含义/影响</td></tr>
+    <p class="text-muted" style="font-size:0.83rem;margin-bottom:14px">基于2023–2025年真题听力原文归纳，按场景分组。点击组名展开/收起。</p>
+
+    <!-- 组1：学术/校园 -->
+    <div class="vocab-group">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🎓 学术 &amp; 校园场景</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">高频出现于长对话 Section B，考点：课程、论文、图书馆</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>英文</th><th>中文</th><th>真题场景</th></tr>
+          <tr><td>hypothesis</td><td>假设</td><td>科研讲座</td></tr>
+          <tr><td>methodology</td><td>研究方法</td><td>学术报告</td></tr>
+          <tr><td>findings / results</td><td>研究结果</td><td>讲座/报道</td></tr>
+          <tr><td>significant / substantial</td><td>显著的/大量的</td><td>数据描述</td></tr>
+          <tr><td>correlation</td><td>相关性</td><td>心理/社会学讲座</td></tr>
+          <tr><td>implication</td><td>含义；潜在影响</td><td>结论段</td></tr>
+          <tr><td>elective / compulsory</td><td>选修/必修课</td><td>选课对话</td></tr>
+          <tr><td>thesis / dissertation</td><td>论文</td><td>毕业论文讨论</td></tr>
+          <tr><td>deadline / submit</td><td>截止日期/提交</td><td>作业场景</td></tr>
+          <tr><td>internship / placement</td><td>实习</td><td>职业规划对话</td></tr>
+          <tr><td>scholarship / grant</td><td>奖学金/助研金</td><td>经济援助场景</td></tr>
+          <tr><td>seminar / lecture</td><td>研讨会/讲座</td><td>学术活动</td></tr>
         </table>
       </div>
-      <div>
-        <h3>社会/经济类</h3>
-        <table>
-          <tr><th>英文</th><th>中文</th></tr>
-          <tr><td>unemployment rate</td><td>失业率</td></tr>
-          <tr><td>recession</td><td>经济衰退</td></tr>
-          <tr><td>inflation</td><td>通货膨胀</td></tr>
-          <tr><td>entrepreneurship</td><td>创业精神</td></tr>
-          <tr><td>workforce</td><td>劳动力</td></tr>
-          <tr><td>inequality</td><td>不平等</td></tr>
+    </div>
+
+    <!-- 组2：职场/求职 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>💼 职场 &amp; 求职场景</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">高频出现于长对话，考点：面试、升职、工作安排</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>英文</th><th>中文</th><th>真题场景</th></tr>
+          <tr><td>resume / CV</td><td>简历</td><td>求职面试</td></tr>
+          <tr><td>applicant / candidate</td><td>申请人/候选人</td><td>招聘对话</td></tr>
+          <tr><td>promotion / raise</td><td>晋升/加薪</td><td>职场讨论</td></tr>
+          <tr><td>deadline / workload</td><td>截止日期/工作量</td><td>工作安排</td></tr>
+          <tr><td>entrepreneur / startup</td><td>创业者/初创公司</td><td>商业讲座</td></tr>
+          <tr><td>workforce / labor market</td><td>劳动力/劳动力市场</td><td>经济报道</td></tr>
+          <tr><td>automation / AI</td><td>自动化/人工智能</td><td>科技与就业</td></tr>
+          <tr><td>negotiate / contract</td><td>谈判/合同</td><td>商务场景</td></tr>
+          <tr><td>remote work / flexible hours</td><td>远程办公/弹性工时</td><td>现代职场</td></tr>
+          <tr><td>redundancy / layoff</td><td>裁员</td><td>经济类报道</td></tr>
         </table>
       </div>
-      <div>
-        <h3>环境类</h3>
-        <table>
-          <tr><th>英文</th><th>中文</th></tr>
-          <tr><td>carbon emissions</td><td>碳排放</td></tr>
-          <tr><td>renewable energy</td><td>可再生能源</td></tr>
-          <tr><td>biodiversity</td><td>生物多样性</td></tr>
-          <tr><td>deforestation</td><td>森林砍伐</td></tr>
-          <tr><td>ecosystem</td><td>生态系统</td></tr>
-          <tr><td>sustainability</td><td>可持续性</td></tr>
+    </div>
+
+    <!-- 组3：社会/经济 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🏙️ 社会 &amp; 经济场景</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">高频出现于篇章/讲座，考点：数字、趋势、政策</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>英文</th><th>中文</th><th>真题场景</th></tr>
+          <tr><td>recession / downturn</td><td>经济衰退/下滑</td><td>经济报道</td></tr>
+          <tr><td>inflation / deflation</td><td>通胀/通缩</td><td>财经讲座</td></tr>
+          <tr><td>inequality / disparity</td><td>不平等/差距</td><td>社会问题</td></tr>
+          <tr><td>poverty / welfare</td><td>贫困/福利</td><td>社会政策</td></tr>
+          <tr><td>urbanization</td><td>城镇化</td><td>社会变迁</td></tr>
+          <tr><td>demographic / population</td><td>人口统计/人口</td><td>社会学讲座</td></tr>
+          <tr><td>consumption / expenditure</td><td>消费/支出</td><td>经济数据</td></tr>
+          <tr><td>initiative / policy</td><td>举措/政策</td><td>政府报道</td></tr>
+          <tr><td>survey / statistics</td><td>调查/统计数据</td><td>数据类题目</td></tr>
+          <tr><td>volunteer / community</td><td>志愿者/社区</td><td>公益场景（2024真题）</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 组4：科技/环境 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🌿 科技 &amp; 环境场景</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">高频出现于讲座/报道，近年考频上升</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>英文</th><th>中文</th><th>真题场景</th></tr>
+          <tr><td>carbon emissions / carbon footprint</td><td>碳排放/碳足迹</td><td>气候变化讲座</td></tr>
+          <tr><td>renewable energy</td><td>可再生能源</td><td>能源报道</td></tr>
+          <tr><td>biodiversity / species</td><td>生物多样性/物种</td><td>生态讲座</td></tr>
+          <tr><td>deforestation / habitat</td><td>森林砍伐/栖息地</td><td>环保报道</td></tr>
+          <tr><td>sustainability / sustainable</td><td>可持续性/可持续的</td><td>环境政策</td></tr>
+          <tr><td>innovation / breakthrough</td><td>创新/突破</td><td>科技讲座</td></tr>
+          <tr><td>artificial intelligence / algorithm</td><td>人工智能/算法</td><td>AI专题</td></tr>
+          <tr><td>gene / genome / DNA</td><td>基因/基因组</td><td>生物医学讲座</td></tr>
+          <tr><td>climate change / global warming</td><td>气候变化/全球变暖</td><td>环境报道</td></tr>
+          <tr><td>digital / virtual / online</td><td>数字/虚拟/线上</td><td>科技生活</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 组5：健康/医疗 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🏥 健康 &amp; 医疗场景</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">短对话和篇章均有出现，考点：症状、建议、就诊</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>英文</th><th>中文</th><th>真题场景</th></tr>
+          <tr><td>symptom / diagnosis</td><td>症状/诊断</td><td>就医对话</td></tr>
+          <tr><td>prescription / medication</td><td>处方/药物</td><td>医院场景</td></tr>
+          <tr><td>chronic / acute</td><td>慢性/急性</td><td>医学讲座</td></tr>
+          <tr><td>mental health / well-being</td><td>心理健康/幸福感</td><td>心理学讲座</td></tr>
+          <tr><td>obesity / diet</td><td>肥胖/饮食</td><td>健康报道</td></tr>
+          <tr><td>exercise / physical activity</td><td>锻炼/体力活动</td><td>健康建议</td></tr>
+          <tr><td>immune system / vaccine</td><td>免疫系统/疫苗</td><td>医学报道</td></tr>
+          <tr><td>stress / anxiety / depression</td><td>压力/焦虑/抑郁</td><td>心理健康讲座</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 组6：听力信号词 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🔑 高频信号词（答题关键）</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">出现这些词时立即提高注意力，答案往往紧随其后</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>信号词/短语</th><th>作用</th><th>提示</th></tr>
+          <tr><td>but / however / yet / though</td><td>转折</td><td>转折后是答案重点</td></tr>
+          <tr><td>actually / in fact / as a matter of fact</td><td>纠正/强调</td><td>前面说法被推翻</td></tr>
+          <tr><td>the point is / the key is</td><td>强调核心</td><td>直接给出答案</td></tr>
+          <tr><td>I suggest / I recommend / why not</td><td>建议</td><td>建议类题目答案</td></tr>
+          <tr><td>because / since / due to / owing to</td><td>原因</td><td>原因类题目答案</td></tr>
+          <tr><td>first / second / finally / in addition</td><td>列举</td><td>细节题注意顺序</td></tr>
+          <tr><td>as a result / therefore / consequently</td><td>结果</td><td>结果/影响类题目</td></tr>
+          <tr><td>I'm afraid / unfortunately</td><td>否定/遗憾</td><td>说话人态度消极</td></tr>
+          <tr><td>That's a good idea / Sounds great</td><td>赞同</td><td>说话人态度积极</td></tr>
         </table>
       </div>
     </div>
@@ -601,37 +694,125 @@
 
     <div class="card">
     <h2>📚 翻译高频词汇速查</h2>
-    <div class="grid-2">
-      <div>
-        <h3>中国文化专有名词</h3>
-        <table>
-          <tr><th>中文</th><th>英文</th></tr>
-          <tr><td>丝绸之路</td><td>the Silk Road</td></tr>
-          <tr><td>一带一路</td><td>the Belt and Road Initiative</td></tr>
-          <tr><td>春节</td><td>the Spring Festival (Chinese New Year)</td></tr>
-          <tr><td>中秋节</td><td>the Mid-Autumn Festival</td></tr>
-          <tr><td>端午节</td><td>the Dragon Boat Festival</td></tr>
-          <tr><td>太极拳</td><td>Tai Chi</td></tr>
-          <tr><td>针灸</td><td>acupuncture</td></tr>
-          <tr><td>书法</td><td>calligraphy</td></tr>
-          <tr><td>瓷器</td><td>porcelain / china</td></tr>
-          <tr><td>非物质文化遗产</td><td>intangible cultural heritage</td></tr>
+    <p class="text-muted" style="font-size:0.83rem;margin-bottom:14px">基于2023–2025年18套真题翻译原文归纳，按主题分组。点击组名展开/收起。</p>
+
+    <!-- 组1：中国文化专有名词 -->
+    <div class="vocab-group">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🏮 中国文化专有名词</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">几乎每套必考，固定译法须背熟</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>中文</th><th>英文</th><th>出现真题</th></tr>
+          <tr><td>丝绸之路</td><td>the Silk Road</td><td>多次</td></tr>
+          <tr><td>一带一路</td><td>the Belt and Road Initiative</td><td>多次</td></tr>
+          <tr><td>春节</td><td>the Spring Festival (Chinese New Year)</td><td>多次</td></tr>
+          <tr><td>中秋节</td><td>the Mid-Autumn Festival</td><td>多次</td></tr>
+          <tr><td>端午节</td><td>the Dragon Boat Festival</td><td>多次</td></tr>
+          <tr><td>太极拳</td><td>Tai Chi</td><td>文化类</td></tr>
+          <tr><td>针灸</td><td>acupuncture</td><td>中医类</td></tr>
+          <tr><td>书法</td><td>calligraphy</td><td>文化类</td></tr>
+          <tr><td>瓷器</td><td>porcelain / china</td><td>文化类</td></tr>
+          <tr><td>非物质文化遗产</td><td>intangible cultural heritage</td><td>文化保护类</td></tr>
+          <tr><td>儒家思想</td><td>Confucianism</td><td>传统文化类</td></tr>
+          <tr><td>中华民族</td><td>the Chinese nation</td><td>多次</td></tr>
+          <tr><td>传统美德</td><td>traditional virtue</td><td>2025/12第一套</td></tr>
+          <tr><td>中华文明</td><td>Chinese civilization</td><td>文化类</td></tr>
         </table>
       </div>
-      <div>
-        <h3>常用翻译表达</h3>
-        <table>
-          <tr><th>中文</th><th>英文</th></tr>
-          <tr><td>举世瞩目</td><td>attract worldwide attention</td></tr>
-          <tr><td>博大精深</td><td>extensive and profound</td></tr>
-          <tr><td>天人合一</td><td>harmony between man and nature</td></tr>
-          <tr><td>数千年</td><td>thousands of years / millennia</td></tr>
-          <tr><td>越来越多</td><td>an increasing number of</td></tr>
-          <tr><td>深远影响</td><td>profound influence / far-reaching impact</td></tr>
-          <tr><td>重要组成部分</td><td>an important component of</td></tr>
-          <tr><td>促进发展</td><td>promote / facilitate development</td></tr>
-          <tr><td>体现了</td><td>reflect / embody / demonstrate</td></tr>
-          <tr><td>标志着</td><td>mark / signify / represent</td></tr>
+    </div>
+
+    <!-- 组2：社会发展与政策 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🏛️ 社会发展 &amp; 政策</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">近年高频主题：乡村振兴、老龄化、社会和谐</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>中文</th><th>英文</th><th>出现真题</th></tr>
+          <tr><td>乡村振兴</td><td>rural revitalization</td><td>2025/6第三套</td></tr>
+          <tr><td>脱贫攻坚</td><td>poverty alleviation</td><td>社会类</td></tr>
+          <tr><td>社会和谐</td><td>social harmony</td><td>2025/12第一套</td></tr>
+          <tr><td>可持续发展</td><td>sustainable development</td><td>多次</td></tr>
+          <tr><td>共同富裕</td><td>common prosperity</td><td>社会类</td></tr>
+          <tr><td>老龄化社会</td><td>aging society</td><td>尊老类</td></tr>
+          <tr><td>社会保障</td><td>social security</td><td>政策类</td></tr>
+          <tr><td>行为规范</td><td>code of conduct</td><td>2025/12第一套</td></tr>
+          <tr><td>社会准则</td><td>social norm</td><td>2025/12第一套</td></tr>
+          <tr><td>社会共识</td><td>social consensus</td><td>2025/12第一套</td></tr>
+          <tr><td>权益保障</td><td>protection of rights and interests</td><td>政策类</td></tr>
+          <tr><td>改革开放</td><td>reform and opening-up</td><td>多次</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 组3：科技创新 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>🚀 科技创新</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">2023–2025年高频主题，AI/航天/5G反复出现</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>中文</th><th>英文</th><th>出现真题</th></tr>
+          <tr><td>人工智能</td><td>artificial intelligence (AI)</td><td>多次</td></tr>
+          <tr><td>5G网络</td><td>5G network</td><td>2025/12第二套</td></tr>
+          <tr><td>航天工程</td><td>aerospace engineering</td><td>2025/12第二套</td></tr>
+          <tr><td>嫦娥探月工程</td><td>the Chang'e lunar exploration program</td><td>2025/12第二套</td></tr>
+          <tr><td>电子支付</td><td>electronic payment / mobile payment</td><td>2025/12第二套</td></tr>
+          <tr><td>远程医疗</td><td>telemedicine</td><td>2025/12第二套</td></tr>
+          <tr><td>科研投入</td><td>investment in scientific research</td><td>科技类</td></tr>
+          <tr><td>自主创新</td><td>independent innovation</td><td>科技类</td></tr>
+          <tr><td>信息技术</td><td>information technology (IT)</td><td>多次</td></tr>
+          <tr><td>数字经济</td><td>digital economy</td><td>科技类</td></tr>
+          <tr><td>新能源</td><td>new energy / clean energy</td><td>环保科技类</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 组4：高频动词短语 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>✍️ 高频动词 &amp; 表达</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">翻译得分关键：用准动词，避免直译</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>中文</th><th>英文</th><th>用法提示</th></tr>
+          <tr><td>深植于</td><td>be deeply rooted in</td><td>文化/传统类必备</td></tr>
+          <tr><td>举世瞩目</td><td>attract worldwide attention</td><td>成就类</td></tr>
+          <tr><td>博大精深</td><td>extensive and profound</td><td>文化描述</td></tr>
+          <tr><td>天人合一</td><td>harmony between man and nature</td><td>哲学/文化类</td></tr>
+          <tr><td>越来越多</td><td>an increasing number of / increasingly</td><td>趋势描述</td></tr>
+          <tr><td>深远影响</td><td>profound influence / far-reaching impact</td><td>影响类</td></tr>
+          <tr><td>重要组成部分</td><td>an important component / integral part of</td><td>结构描述</td></tr>
+          <tr><td>促进发展</td><td>promote / facilitate / drive development</td><td>政策/科技类</td></tr>
+          <tr><td>体现了</td><td>reflect / embody / demonstrate</td><td>价值观描述</td></tr>
+          <tr><td>标志着</td><td>mark / signify / represent</td><td>历史节点</td></tr>
+          <tr><td>广泛传承</td><td>be widely passed down / inherited</td><td>文化传承</td></tr>
+          <tr><td>不懈奋斗</td><td>strive unremittingly / work tirelessly</td><td>精神类</td></tr>
+          <tr><td>取得突破</td><td>achieve a breakthrough / make progress in</td><td>科技成就</td></tr>
+          <tr><td>积极营造</td><td>actively create / foster</td><td>社会氛围</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 组5：精神/价值观 -->
+    <div class="vocab-group" style="margin-top:10px">
+      <div class="vocab-group-header" onclick="toggleVocabGroup(this)">
+        <span>💡 精神 &amp; 价值观表达</span><span class="vocab-arrow">▶</span>
+        <span class="vocab-group-note">2023–2025年翻译主题高度集中于此类</span>
+      </div>
+      <div class="vocab-group-body">
+        <table><tr><th>中文</th><th>英文</th><th>出现真题</th></tr>
+          <tr><td>自强自立</td><td>self-reliance and self-improvement</td><td>2025/12第二套</td></tr>
+          <tr><td>艰苦奋斗</td><td>hard work and perseverance</td><td>精神类</td></tr>
+          <tr><td>尊老敬老</td><td>respect for the elderly</td><td>2025/12第一套</td></tr>
+          <tr><td>家国情怀</td><td>patriotism and family values</td><td>文化类</td></tr>
+          <tr><td>工匠精神</td><td>craftsmanship spirit</td><td>职业类</td></tr>
+          <tr><td>民族自信</td><td>national confidence / cultural confidence</td><td>文化类</td></tr>
+          <tr><td>中华民族伟大复兴</td><td>the great rejuvenation of the Chinese nation</td><td>多次</td></tr>
+          <tr><td>社会责任感</td><td>sense of social responsibility</td><td>志愿/公益类</td></tr>
+          <tr><td>集体主义</td><td>collectivism</td><td>价值观类</td></tr>
+          <tr><td>以人为本</td><td>people-centered / people-oriented</td><td>政策类</td></tr>
         </table>
       </div>
     </div>
@@ -664,6 +845,7 @@
         <span id="vocab-stats" class="text-muted" style="font-size:0.82rem"></span>
         <button class="btn btn-primary" onclick="drawCards()">🔀 随机刷新20词</button>
         <button class="btn btn-outline btn-sm" onclick="showWordbook()">📖 生词本</button>
+        <button class="btn btn-outline btn-sm" onclick="showMastered()">✓ 已掌握</button>
       </div>
     </div>
 
@@ -692,6 +874,18 @@
         <button class="btn btn-outline btn-sm" onclick="exportWordbook()">📥 导出生词本</button>
         <button class="btn btn-outline btn-sm" style="color:var(--danger);border-color:var(--danger)" onclick="clearWordbook()">🗑️ 清空生词本</button>
       </div>
+    </div>
+  </div>
+
+  <!-- 已掌握单词弹窗 -->
+  <div id="mastered-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;overflow-y:auto" onclick="if(event.target===this)closeMastered()">
+    <div style="background:white;max-width:700px;margin:40px auto;border-radius:16px;padding:28px;position:relative">
+      <div class="flex-between" style="margin-bottom:16px">
+        <h2 style="font-size:1.2rem">✓ 已掌握单词 <span id="ms-count" class="badge badge-green"></span></h2>
+        <button class="btn btn-outline btn-sm" onclick="closeMastered()">✕ 关闭</button>
+      </div>
+      <p class="text-muted" style="font-size:0.82rem;margin-bottom:14px">点击"撤回"可将单词重新加入练习池。</p>
+      <div id="mastered-list"></div>
     </div>
   </div>
 
